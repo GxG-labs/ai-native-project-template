@@ -7,6 +7,7 @@ It is designed for projects that may involve code, documents, datasets, research
 ## Start Here
 
 - `PROJECT.md` explains why this project exists, its main job, and what a good result means.
+- `templates/project-charter.md` provides a reusable outcome-first charter format.
 - `PROJECT_STRUCTURE.md` explains the project organization model.
 - `ai/README.md` explains the shared AI operating system.
 - `ai/project-context.md` stores stable project context.
@@ -20,7 +21,7 @@ The template uses lazy folder creation. New projects start small. Additional fol
 ## How To Start A New Project
 
 1. Rename the project and update this `README.md`.
-2. Fill in `PROJECT.md` with the project's purpose, main job, ideal result, and success criteria.
+2. Fill in `PROJECT.md` using the outcome-first format in `templates/project-charter.md`.
 3. Fill in `ai/project-context.md` with durable facts: audience, constraints, glossary, and assumptions.
 4. Create a brief in `briefs/` that captures the first real goal.
 5. Drop current task files into `workbench/input/` if no better location exists yet.

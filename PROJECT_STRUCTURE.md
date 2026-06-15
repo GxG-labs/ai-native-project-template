@@ -1012,6 +1012,7 @@ This is an advanced folder. Create it when repeated file formats are emerging an
 Use this folder for:
 
 - Brief templates.
+- Project charter templates.
 - Task templates.
 - Decision record templates.
 - Module README templates.
@@ -1024,6 +1025,7 @@ Example:
 
 ```text
 templates/
+  project-charter.md
   brief.md
   task.md
   decision-record.md
@@ -1096,6 +1098,8 @@ It should explain:
 - Current focus.
 
 `PROJECT.md` is not a task brief and not an AI instruction file. It is the durable project intent that helps everyone avoid losing the point of the work.
+
+Use `templates/project-charter.md` when creating or rewriting it.
 
 ### `README.md`
 

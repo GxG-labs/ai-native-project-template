@@ -10,6 +10,8 @@ Before acting:
 4. Check `PROJECT_STRUCTURE.md` when deciding where files belong.
 5. Use only the folders that are actually needed for the current work.
 
+If `PROJECT.md` is empty, vague, or still mostly TODOs, help clarify it before making large structural, strategic, or irreversible changes.
+
 When producing work:
 
 - Keep raw inputs separate from analysis and outputs.
