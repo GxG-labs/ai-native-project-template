@@ -1,0 +1,43 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local temporary files
+tmp/
+.DS_Store
+.lanes/
+
+# Workbench contents are local by default.
+workbench/input/*
+!workbench/input/README.md
+workbench/output/*
+!workbench/output/README.md
+
+# Logs
+*.log
+logs/
+
+# Local databases
+*.sqlite
+*.sqlite3
+*.db
+
+# Dependencies and caches
+node_modules/
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Build outputs
+dist/
+build/
+.next/
+out/
