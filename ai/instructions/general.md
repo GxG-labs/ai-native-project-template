@@ -4,10 +4,11 @@ Use this project as an organized workspace, not as a loose file dump.
 
 Before acting:
 
-1. Read the relevant brief or user request.
-2. Read `ai/constitution.md`.
-3. Check `PROJECT_STRUCTURE.md` when deciding where files belong.
-4. Use only the folders that are actually needed for the current work.
+1. Read `PROJECT.md`.
+2. Read the relevant brief or user request.
+3. Read `ai/constitution.md`.
+4. Check `PROJECT_STRUCTURE.md` when deciding where files belong.
+5. Use only the folders that are actually needed for the current work.
 
 When producing work:
 

@@ -21,6 +21,7 @@ This is intentional. In this template, AI instructions, skills, playbooks, workf
 Files such as `AGENTS.md`, `CLAUDE.md`, and `GEMINI.md` should stay thin. They should only point each LLM system to the shared project AI layer:
 
 ```md
+Start with `PROJECT.md`.
 Use the project AI system in `ai/`.
 Start with `ai/README.md`.
 ```
@@ -99,6 +100,7 @@ The structure has three levels:
 
 ```text
 project/
+  PROJECT.md
   README.md
   PROJECT_STRUCTURE.md
   AGENTS.md
@@ -137,6 +139,7 @@ Core files and folders exist in every project:
 
 ```text
 README.md
+PROJECT.md
 PROJECT_STRUCTURE.md
 AGENTS.md
 CLAUDE.md
@@ -190,6 +193,7 @@ Every new project should start with this minimal structure:
 
 ```text
 project/
+  PROJECT.md
   README.md
   PROJECT_STRUCTURE.md
   AGENTS.md
@@ -220,6 +224,7 @@ project/
 
 Why this minimum exists:
 
+- `PROJECT.md` defines why the project exists, what its main job is, and what success means.
 - `README.md` gives the project a top-level entry point.
 - `PROJECT_STRUCTURE.md` preserves the structural rules and future folder catalog.
 - `AGENTS.md`, `CLAUDE.md`, and `GEMINI.md` point all major assistants to the same AI layer.
@@ -1074,6 +1079,24 @@ AI-assisted work creates many temporary files. Giving them an explicit local hom
 
 ## Root Files
 
+### `PROJECT.md`
+
+The project charter.
+
+This is the first meaning-oriented file humans and AI assistants should read.
+
+It should explain:
+
+- Why the project exists.
+- The project's main job.
+- The ideal final result.
+- What counts as a good result now.
+- Success criteria.
+- Non-goals.
+- Current focus.
+
+`PROJECT.md` is not a task brief and not an AI instruction file. It is the durable project intent that helps everyone avoid losing the point of the work.
+
 ### `README.md`
 
 The top-level entry point for the project.
@@ -1171,7 +1194,23 @@ This section defines the preferred order of work for a professional AI-assisted 
 
 The order is not bureaucracy. It exists so that an assistant can move from vague intent to reliable output without mixing sources, analysis, code, instructions, and deliverables.
 
-### 1. Start With Intent
+### 1. Start With The Project Charter
+
+Create or update `PROJECT.md`.
+
+It should capture:
+
+- Why the project exists.
+- The main job.
+- The ideal final result.
+- What counts as a good result.
+- Success criteria.
+- Non-goals.
+- Current focus.
+
+This file should stay short. It is the project's sense-making anchor.
+
+### 2. Capture The Task Intent
 
 Create or update a brief in `briefs/`.
 
@@ -1187,11 +1226,12 @@ The brief should capture:
 
 If the project is too small for a full brief, create a short note anyway. Intent should be explicit.
 
-### 2. Load The AI Operating Context
+### 3. Load The AI Operating Context
 
 Before doing substantive work, assistants should read:
 
 ```text
+PROJECT.md
 ai/README.md
 ai/constitution.md
 ai/project-context.md
@@ -1207,7 +1247,7 @@ Then read only the relevant additional files:
 - `ai/workflows/*` for multi-step processes.
 - `docs/*` for stable system context.
 
-### 3. Create Tasks Only When Needed
+### 4. Create Tasks Only When Needed
 
 If the brief requires multiple steps, create managed tasks in `tasks/`.
 
@@ -1221,7 +1261,7 @@ Use `tasks/` when work needs:
 
 For a tiny project, skip `tasks/` and work directly from the brief.
 
-### 4. Collect Inputs And References
+### 5. Collect Inputs And References
 
 If the user has dropped files into the project without specifying a precise location, start with:
 
@@ -1235,7 +1275,7 @@ Put structured data in `data/input/`.
 
 Do not summarize or rewrite sources in place. Keep raw sources separate so later conclusions can be traced back.
 
-### 5. Analyze In Research
+### 6. Analyze In Research
 
 Use `research/` for working notes, findings, comparisons, and synthesis.
 
@@ -1243,7 +1283,7 @@ This is where sources become understanding.
 
 Do not put final guidance directly into `research/` unless it is still exploratory. Once a method becomes reusable, promote it to `ai/playbooks/`.
 
-### 6. Promote Reusable Knowledge
+### 7. Promote Reusable Knowledge
 
 When research produces a durable method, create or update a playbook in `ai/playbooks/`.
 
@@ -1258,7 +1298,7 @@ Promotion rule:
 - `ai/skills/` is how an assistant executes a repeatable task.
 - `ai/workflows/` is how several tasks are orchestrated.
 
-### 7. Implement Or Assemble
+### 8. Implement Or Assemble
 
 Use the appropriate implementation location:
 
@@ -1270,7 +1310,7 @@ Use the appropriate implementation location:
 
 Create these folders lazily as soon as they are truly needed.
 
-### 8. Verify
+### 9. Verify
 
 Use the right verification layer:
 
@@ -1280,7 +1320,7 @@ Use the right verification layer:
 
 For document, presentation, and marketing work, verification should include output inspection, not just successful file creation.
 
-### 9. Produce Artifacts
+### 10. Produce Artifacts
 
 Put intermediate outputs in `workbench/output/` when the user has not requested a final destination.
 
@@ -1293,7 +1333,7 @@ Use:
 - `artifacts/exports/` for generated formats and external exports.
 - `artifacts/registry.md` when the project has multiple deliverables to track.
 
-### 10. Document Stable Decisions
+### 11. Document Stable Decisions
 
 When a decision changes the project direction, architecture, operating model, or reusable method, record it.
 
@@ -1306,7 +1346,7 @@ Use:
 
 Do not put unstable research notes in `docs/`.
 
-### 11. Clean Up
+### 12. Clean Up
 
 Before considering work complete:
 
@@ -1480,6 +1520,7 @@ The minimal useful version is the starter structure defined near the top of this
 
 ```text
 project/
+  PROJECT.md
   README.md
   PROJECT_STRUCTURE.md
   AGENTS.md
@@ -1497,6 +1538,13 @@ project/
     instructions/
       general.md
       organization.md
+
+  workbench/
+    README.md
+    input/
+      README.md
+    output/
+      README.md
 
   briefs/
 ```
