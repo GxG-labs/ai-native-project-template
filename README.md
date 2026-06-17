@@ -32,8 +32,8 @@ The template uses lazy folder creation. New projects start small. Additional fol
 ## Default File Flow
 
 ```text
-briefs/             -> what is being asked
-workbench/input/    -> temporary files for the current task
+briefs/             -> meaning input: what is being asked and why
+workbench/input/    -> file input: temporary files for the current task
 workbench/output/   -> intermediate generated results
 references/         -> external sources worth keeping
 research/           -> working analysis and findings

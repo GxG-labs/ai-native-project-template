@@ -1,0 +1,4 @@
+interface:
+  display_name: "Align Project Rules"
+  short_description: "Bring a project back to its rules"
+  default_prompt: "Use $align-project-rules to audit this project and bring files, folders, and AI instructions back in line with the project rules."

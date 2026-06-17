@@ -17,6 +17,14 @@ When producing work:
 - Keep raw inputs separate from analysis and outputs.
 - If the user does not specify where task files are, inspect `workbench/input/` first.
 - Put intermediate results in `workbench/output/` unless a better destination is specified.
+- During multi-step work, treat generated files as provisional until their lifecycle role is clear.
+- At the end of each meaningful phase, reclassify useful files by role:
+  - promote reusable structured inputs to `data/`;
+  - promote external or raw source material to `references/`;
+  - promote findings, notes, and synthesis to `research/`;
+  - promote accepted operating knowledge to `docs/`;
+  - promote human-facing deliverables to `artifacts/`;
+  - leave disposable or still-unreviewed files in `workbench/output/` or remove them.
 - Promote reusable methods into `ai/playbooks/`, `ai/skills/`, or `ai/workflows/` only when they are genuinely reusable.
 - Put stable system documentation in `docs/`, not in `ai/`.
 - Put final deliverables in `artifacts/final/`.

@@ -12,7 +12,19 @@ This prevents the common failure mode where briefs, downloaded PDFs, prompt expe
 
 ## Design Principles
 
-### 1. Visible AI Layer
+### 1. Conventional Names, Conventional Meaning
+
+Use established file and folder names when they exist, and preserve their common industry meaning.
+
+Do not invent custom names for concepts that already have recognizable conventions. A new teammate or AI agent should be able to infer the role of `README.md`, `docs/`, `src/`, `tests/`, `scripts/`, `examples/`, `templates/`, `.env.example`, `SECURITY.md`, and similar files without reading project-specific explanations.
+
+Custom names are allowed only when no strong convention exists or when the project has a clearly documented domain-specific concept.
+
+Before creating or renaming a file or folder, check whether the industry already has a conventional name for that responsibility. If it does, use the conventional name and meaning.
+
+Use `README.md` as the local explanation file for a directory when the directory's purpose is not obvious from its conventional name, when it has meaningful subfolders, or when it has rules that prevent misuse. In the project root, `README.md` introduces the whole project. In a subdirectory, `README.md` explains that directory.
+
+### 2. Visible AI Layer
 
 AI instructions are stored in a visible `ai/` folder, not in a hidden `.ai/` folder.
 
@@ -28,7 +40,7 @@ Start with `ai/README.md`.
 
 This keeps `ai/` as the single source of truth. Project skills and operating rules are edited once and reused across Codex, Claude, Gemini, and other assistants.
 
-### 2. Human And Agent Readability
+### 3. Human And Agent Readability
 
 The project should be understandable both to a human teammate and to an AI agent.
 
@@ -43,7 +55,41 @@ A new reader should quickly answer:
 - Where is the implementation?
 - Where are the final outputs?
 
-### 3. Docs Are Stable Project Knowledge
+Optimize first for shared understanding, then for agent efficiency. AI-specific files should improve navigation and task execution without turning the project into a private prompt system for one editor or model.
+
+### 4. Modular AI Instructions
+
+AI instructions should be modular and loaded by relevance, not stored as one large rule file.
+
+The project AI layer in `ai/` is the source of truth. Tool-specific files such as `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursor/rules/*.mdc`, `.windsurfrules`, and `.github/copilot-instructions.md` are adapters. They should route each assistant to the shared `ai/` system instead of duplicating project rules.
+
+Keep always-loaded instructions short. Put task-specific methods into `ai/playbooks/`, `ai/skills/`, `ai/workflows/`, and `ai/checklists/`, and load them only when relevant. This reduces context overhead and helps agents focus on the rules that matter for the current task.
+
+When an editor supports rule metadata, such as Cursor `.mdc` files, use activation modes deliberately:
+
+- Always-loaded rules only for critical project invariants.
+- Path or glob-attached rules for specific source areas.
+- Description or request-triggered rules for optional capabilities.
+- Manual rules for review, deployment, and other human-invoked checklists.
+
+Hidden or tool-specific files may route, index, or selectively activate instructions, but they should not become the only place where important project rules exist.
+
+### 5. Universal Adapter Contract
+
+Every AI adapter must point to the shared project AI system and preserve the same startup contract:
+
+1. Read `PROJECT.md`.
+2. Read `ai/README.md`.
+3. Read `ai/constitution.md`.
+4. Read `ai/project-context.md`.
+5. Read `ai/instructions/general.md`.
+6. Read `ai/instructions/organization.md` when creating or moving files.
+7. Read `PROJECT_STRUCTURE.md` when deciding where files belong.
+8. Load only the additional playbooks, skills, workflows, and checklists relevant to the current task.
+
+If a project has extra planning files such as requirements, design notes, session context, or task lists, keep them in conventional project locations and make the relevant adapter or workflow point to them explicitly.
+
+### 6. Docs Are Stable Project Knowledge
 
 `docs/` is reserved for accepted, cleaned, stable documentation about the project or system.
 
@@ -58,7 +104,7 @@ The distinction is about purpose:
 - `docs/` describes how the project or system works.
 - `ai/` describes how AI assistants should work with the project or system.
 
-### 4. Reproducibility
+### 7. Reproducibility
 
 Every important result should be traceable:
 
@@ -70,13 +116,13 @@ Every important result should be traceable:
 
 The template should make it possible to return to a project months later and understand how a report, presentation, assistant, automation, or software feature was produced.
 
-### 5. Private By Default, GitHub-Ready When Needed
+### 8. Private By Default, GitHub-Ready When Needed
 
 The template assumes many projects will be private, client-related, or personally sensitive.
 
 It should protect secrets, local data, raw exports, and temporary files by default, while still being organized enough to publish safely on GitHub when appropriate.
 
-### 6. Lazy Folder Creation
+### 9. Lazy Folder Creation
 
 New projects should not start with dozens of empty folders.
 
@@ -235,9 +281,9 @@ Why this minimum exists:
 - `ai/project-context.md` keeps stable project facts in one compact place.
 - `ai/instructions/general.md` defines default AI behavior.
 - `ai/instructions/organization.md` gives assistants the short anti-sprawl rules.
-- `workbench/input/` is the default drop zone for files provided for the current task.
+- `workbench/input/` is the default file-input drop zone for files provided for the current task.
 - `workbench/output/` is the default place for intermediate generated results.
-- `briefs/` gives human intent a proper home.
+- `briefs/` gives meaning input and human intent a proper home.
 
 All other folders are created lazily.
 
@@ -254,6 +300,8 @@ Create a folder only when at least one of these is true:
 Do not create a folder merely because it exists in the reference structure.
 
 When a new folder is created, add a short `README.md` if the folder's purpose would not be obvious to a new teammate or AI assistant.
+
+A folder `README.md` should stay brief. It should explain what belongs there, what does not belong there, important subfolders, and where durable work should be promoted next. Do not use folder README files to duplicate `PROJECT_STRUCTURE.md` or long-lived project documentation.
 
 ## Anti-Sprawl Controls
 
@@ -377,7 +425,7 @@ Files should not stay in `workbench/` once they become durable project assets.
 Move or copy them to:
 
 - `references/` if they are external sources worth preserving.
-- `data/input/` if they are structured project data.
+- `data/raw/` if they are original structured project data.
 - `research/` if they are working analysis or findings.
 - `artifacts/drafts/` if they are draft deliverables.
 - `artifacts/final/` if they are accepted final deliverables.
@@ -496,6 +544,18 @@ Reusable task-specific AI capabilities.
 
 A skill tells an AI assistant how to perform a repeatable task. It should be concrete enough that an agent can follow it without re-deriving the method every time.
 
+Industry convention:
+
+Use the Agent Skills layout by default:
+
+```text
+ai/skills/<skill-id>/SKILL.md
+```
+
+That means a skill is a directory, and `SKILL.md` is its required entry point. This matches the pattern used by OpenAI Codex, Anthropic Claude Code, and Google Antigravity: the agent first sees lightweight skill metadata or descriptions, then loads the full skill and supporting files only when relevant.
+
+Use kebab-case for `<skill-id>`. Do not flatten substantial skills into loose markdown files under `ai/skills/`.
+
 Use this folder for:
 
 - CV tailoring workflow.
@@ -513,14 +573,54 @@ Recommended structure:
 ai/skills/
   tailor-cv-for-job/
     SKILL.md
-    config.yaml
+    references/
+    templates/
+    scripts/
   build-research-deck/
     SKILL.md
-    config.yaml
+    examples/
+    assets/
   analyze-marketing-data/
     SKILL.md
-    config.yaml
+    scripts/
+    tests/
 ```
+
+Minimal skill:
+
+```text
+ai/skills/
+  summarize-interview/
+    SKILL.md
+```
+
+Expanded skill:
+
+```text
+ai/skills/
+  build-research-deck/
+    SKILL.md
+    references/
+      source-selection.md
+    templates/
+      deck-outline.md
+    scripts/
+      render_deck.py
+    examples/
+      README.md
+```
+
+Inside `SKILL.md`, include concise metadata and operating instructions:
+
+- name and short description;
+- when to use the skill and when not to use it;
+- expected inputs and outputs;
+- step-by-step procedure;
+- tools, scripts, or references the assistant may use;
+- verification or quality checks;
+- failure modes and escalation rules.
+
+Keep `SKILL.md` focused. Put long reference material, API notes, examples, templates, assets, and helper scripts in files next to it so they can be loaded only when needed.
 
 Why this folder exists:
 
@@ -613,6 +713,12 @@ AI-generated work needs explicit quality gates. This folder makes review standar
 
 Task statements, project requests, requirements, and human intent.
 
+This is meaning input:
+
+```text
+briefs/ = what needs to be done and why
+```
+
 Use this folder for:
 
 - Initial project briefs.
@@ -634,6 +740,8 @@ briefs/2026-06-research-deck.md
 Why this folder exists:
 
 Briefs are input, not documentation. They describe what someone asked for, not necessarily what the final system became. Keeping them separate preserves the original intent without polluting stable docs.
+
+Do not use `briefs/` as a file drop zone. Put task files in `workbench/input/` unless they already belong in a durable folder such as `references/` or `data/raw/`.
 
 ### `tasks/`
 
@@ -748,7 +856,7 @@ Recommended structure:
 docs/
   README.md
   architecture/
-  decisions/
+  adr/
   operations/
   operations/runbooks/
   guides/
@@ -762,13 +870,13 @@ Why this folder exists:
 
 Decision records:
 
-Important architectural, operational, and organizational decisions should be recorded in `docs/decisions/`.
+Important architectural decisions should be recorded as ADRs in `docs/adr/`. ADR means Architecture Decision Record, which is the more recognizable industry term for durable technical decisions.
 
 Recommended format:
 
 ```text
-docs/decisions/0001-use-visible-ai-folder.md
-docs/decisions/0002-separate-references-from-research.md
+docs/adr/0001-use-visible-ai-folder.md
+docs/adr/0002-separate-references-from-research.md
 ```
 
 Each decision record should include:
@@ -860,17 +968,19 @@ Recommended structure:
 
 ```text
 data/
-  input/
-  working/
+  raw/
+  interim/
   processed/
+  external/
   reference/
 ```
 
 Folder meaning:
 
-- `data/input/`: structured input data received or collected for the project.
-- `data/working/`: intermediate data created during processing.
+- `data/raw/`: original structured data received or collected for the project; do not rewrite in place.
+- `data/interim/`: intermediate data created during processing.
 - `data/processed/`: cleaned or transformed datasets.
+- `data/external/`: structured third-party data used as an input but not owned by the project.
 - `data/reference/`: stable lookup tables, taxonomies, or reusable structured references.
 
 Why this folder exists:
@@ -902,6 +1012,18 @@ Many projects will include real software. `src/` gives implementation code a con
 Project modules with a shared internal pattern.
 
 Use this folder for larger functional units in a modular system, especially when building a marketing operating system, agent suite, or multi-part automation.
+
+Industry caution:
+
+Do not use `modules/` as a generic substitute for framework or language conventions. In Go, JavaScript, Python, and infrastructure projects, "module" can already have a specific ecosystem meaning. Prefer the conventional folder for the actual system:
+
+- `src/` for ordinary source code.
+- `packages/` for package-based monorepos.
+- `apps/` for deployable applications in app/package monorepos.
+- `services/` for separately deployed services.
+- `cmd/`, `internal/`, and `pkg/` for Go projects when those conventions fit.
+
+Use `modules/` only when the project has domain-level capabilities that are not already better represented by those conventional names.
 
 Examples:
 
@@ -1275,7 +1397,7 @@ workbench/input/
 
 Put raw external materials in `references/`.
 
-Put structured data in `data/input/`.
+Put original structured data in `data/raw/`.
 
 Do not summarize or rewrite sources in place. Keep raw sources separate so later conclusions can be traced back.
 
@@ -1310,7 +1432,7 @@ Use the appropriate implementation location:
 - `modules/` for bounded system capabilities.
 - `scripts/` for utility commands.
 - `config/` for safe versioned configuration.
-- `data/working/` and `data/processed/` for data transformation.
+- `data/interim/` and `data/processed/` for data transformation.
 
 Create these folders lazily as soon as they are truly needed.
 
@@ -1343,7 +1465,7 @@ When a decision changes the project direction, architecture, operating model, or
 
 Use:
 
-- `docs/decisions/` for accepted project decisions.
+- `docs/adr/` for accepted architectural decision records.
 - `docs/architecture/` for system structure.
 - `docs/operations/` for operating instructions.
 - `docs/operations/runbooks/` for step-by-step operational procedures.
@@ -1425,8 +1547,8 @@ ai/skills/tailor-cv-for-job/SKILL.md
 Input files:
 
 ```text
-data/input/current-cv.docx
-data/input/target-job-description.md
+workbench/input/current-cv.docx
+workbench/input/target-job-description.md
 ```
 
 Draft and final outputs:
@@ -1489,7 +1611,7 @@ config/
 docs/
   architecture/
   operations/
-  decisions/
+  adr/
 ```
 
 The rule is simple:
@@ -1563,7 +1685,7 @@ Need working analysis?       Create `research/`.
 Need deliverables?           Create `artifacts/`.
 Need structured data?        Create `data/`.
 Need implementation code?    Create `src/`.
-Need bounded capabilities?   Create `modules/`.
+Need bounded capabilities?   Create `modules/` only when `packages/`, `apps/`, `services/`, or language conventions do not fit.
 Need verification?           Create `tests/` or `evals/`.
 Need reusable formats?       Create `templates/`.
 Need project examples?       Usually avoid; create `examples/` only if examples are a real deliverable.

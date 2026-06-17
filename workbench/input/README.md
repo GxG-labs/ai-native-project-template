@@ -6,3 +6,11 @@ If a task does not specify where to read files from, assistants should inspect t
 
 Contents are ignored by Git by default.
 
+Think of `workbench/input/` as the file input:
+
+```text
+workbench/input/ = files to work with right now
+```
+
+Do not use this folder for task intent, requirements, or success criteria. Put those in `briefs/`.
+
