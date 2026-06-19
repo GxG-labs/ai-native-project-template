@@ -37,11 +37,13 @@ If any of these files are missing, damaged, or contradictory, stop broad reorgan
    - Intermediate generated work belongs in `workbench/output/`.
    - External sources and raw background materials belong in `references/`.
    - Working analysis belongs in `research/`.
+   - Reusable structured inputs for later steps, automation, monitoring, or repeat workflows belong in `data/`.
    - Reusable AI methods belong in `ai/playbooks/`, `ai/skills/`, or `ai/workflows/`.
    - Reusable quality gates belong in `ai/checklists/`.
    - Stable project or system documentation belongs in `docs/`.
    - Final deliverables belong in `artifacts/final/` unless a more specific artifact location exists.
    - Primary implementation belongs in `src/`; tests belong in `tests/`; helper automation belongs in `scripts/`; disposable local work belongs in `tmp/`.
+   - If a generated result becomes an input for later work, classify it by its new durable role rather than leaving it in `artifacts/` or `workbench/output/`.
 
 3. Plan the smallest useful change set.
    - Prefer moving or editing only files needed to restore the project rules.
@@ -69,6 +71,7 @@ If any of these files are missing, damaged, or contradictory, stop broad reorgan
 - If the user asks for "make it follow the rules" without specifying scope, start with structure, AI adapters, and obvious lifecycle violations. Avoid rewriting project intent unless requested.
 - If two rules conflict, prefer the more specific project file over a generic template rule, and surface the conflict in the final report.
 - If a folder contains mixed lifecycles, split by role rather than by file type.
+- If a file was produced as an output but will be consumed by a later workflow, monitoring process, or agent run, promote it to `data/`, `research/`, or `docs/` according to its current role. Do not use `artifacts/` as the default memory store for future work.
 - If a method becomes reusable during cleanup, promote it into `ai/playbooks/`, `ai/skills/`, `ai/workflows/`, or `ai/checklists/` only when it is genuinely reusable.
 - Protect private data. Follow `PRIVACY.md` and `SECURITY.md` when present; if they are missing and sensitive materials exist, flag the gap.
 
