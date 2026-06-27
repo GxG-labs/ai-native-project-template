@@ -28,3 +28,6 @@ These rules guide AI-assisted work in this project.
 
 9. Keep the template lightweight.
    Create folders lazily. Do not add empty structure unless it clarifies real work.
+
+10. Make structured data self-documenting.
+    Each file with lists, schemas, or configuration must have a header with: (a) what it is and why it exists, (b) schema/rules for adding new entries, (c) one or two examples. This makes files operable for LLM agents without external context.

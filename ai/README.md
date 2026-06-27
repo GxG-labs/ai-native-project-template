@@ -2,19 +2,45 @@
 
 Shared AI operating layer for this project.
 
-Read order:
+## Starting a New Project?
 
-1. `../PROJECT.md`
-2. `constitution.md`
-3. `context.md`
-4. `methods/general.md`
-5. `methods/organization.md` — when placing files
+→ Read `workflows/initialize-project.md` (1.5 hours to full setup)
+
+This workflow guides you through:
+1. Defining purpose and scope
+2. Setting up the AI layer
+3. Discovering and choosing skills to implement
+4. Bootstrapping core infrastructure
+5. Defining initial work
+6. Team alignment
+
+**Supported by**:
+- `methods/skills-discovery.md` — How to find and evaluate skills for your domain
+- `checklists/project-initialization.md` — Detailed per-phase checklist
+
+## For Ongoing Work
+
+Read in this order:
+
+1. `../PROJECT.md` — Why the project exists
+2. `constitution.md` — Operating principles
+3. `context.md` — Stable facts AI should remember
+4. `methods/general.md` — How to approach work
+5. `methods/organization.md` — Where files belong
 
 Then load only what is relevant to the current task:
 
-- `methods/` — for task-type instructions and domain rules
-- `skills/` — for executable repeatable procedures
-- `workflows/` — for multi-step orchestration
+- `methods/` — Task-type instructions and domain rules
+- `methods/skills-discovery.md` — When identifying repeatable procedures to document
+- `skills/` — Executable, repeatable procedures
+- `workflows/` — Multi-step orchestrations
+- `checklists/` — Quality gates and verification lists
 
-`ai/` contains instructions for how AI assistants should work.
-It does not contain raw sources, final deliverables, or project outputs.
+## What This Folder Contains
+
+`ai/` contains instructions for how AI assistants (and humans) should work.
+It does NOT contain:
+- Raw sources or external materials (put in `../context/sources/`)
+- Final deliverables or outputs (put in `../output/`)
+- Implementation code (put in `../src/` or equivalent)
+- Work in progress (put in `../output/drafts/`)
