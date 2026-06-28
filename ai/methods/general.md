@@ -6,7 +6,7 @@ Before acting:
 
 1. Read `PROJECT.md`.
 2. Read the relevant intent file from `intent/`.
-3. Read `ai/constitution.md`.
+3. Read `RULES.md` at the project root.
 4. Check `ai/methods/organization.md` when deciding where files belong.
 5. Use only the folders that are actually needed for the current work.
 

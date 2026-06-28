@@ -71,7 +71,7 @@ For a more complete setup, continue with Phases 4-6:
 - \`ai/context.md\` — What AI assistants should remember (filled in Phase 2)
 
 ### May Update
-- \`ai/constitution.md\` — Operating principles (usually keep as-is)
+- \`RULES.md\` — Operating principles (human-curated; edit only with explicit approval)
 - \`SECURITY.md\` and \`PRIVACY.md\` — Security and data handling rules (Phase 4)
 
 ## Example: Initializing a Data Science Project

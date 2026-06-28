@@ -34,7 +34,7 @@ Update `ai/context.md` with stable facts that all AI work should remember:
 - **Glossary**: Non-obvious terms used in the project
 - **Important assumptions**: What must remain true for the plan to work
 
-Update `ai/constitution.md` if the default principles don't fit this project's philosophy.
+Update `RULES.md` if the default principles don't fit this project's philosophy (human must approve the edit).
 
 Output: A usable `ai/context.md` that prevents AI from making harmful assumptions.
 

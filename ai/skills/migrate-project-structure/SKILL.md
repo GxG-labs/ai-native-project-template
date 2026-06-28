@@ -47,7 +47,7 @@ Each top-level folder answers exactly one question:
 
 Before moving anything, read:
 - `PROJECT.md` — understand the project intent
-- `ai/constitution.md` or equivalent — understand operating rules
+- `RULES.md` — understand operating rules
 - List all top-level folders and their contents
 
 ### 2. Create the new folders
@@ -87,8 +87,8 @@ Use this mapping:
 Replace the read order with:
 
 ```
-1. ../PROJECT.md
-2. constitution.md
+1. ../RULES.md
+2. ../PROJECT.md
 3. context.md
 4. methods/general.md
 5. methods/organization.md

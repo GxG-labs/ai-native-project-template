@@ -1,15 +1,5 @@
 # Gemini Instructions
 
-Use the project AI system in `ai/`.
+**STOP. Before doing anything else, read `RULES.md` in full.**
 
-Start with:
-
-1. `PROJECT.md`
-2. `ai/README.md`
-3. `ai/constitution.md`
-4. `ai/project-context.md`
-5. `ai/instructions/general.md`
-6. `ai/instructions/organization.md`
-7. `PROJECT_STRUCTURE.md`
-
-Do not treat this file as the source of truth. It is only an adapter for Gemini-based workflows.
+Do not read any other file, do not make any changes, do not form a plan until you have read `RULES.md`. It governs everything you do in this project.

@@ -61,10 +61,10 @@ Use this checklist to ensure a new project is fully set up and ready for product
   - [ ] Glossary of non-obvious terms
   - [ ] Important assumptions
 
-- [ ] **ai/constitution.md** (5 min)
-  - [ ] Reviewed the default constitution
-  - [ ] Made edits if this project's philosophy differs
-  - [ ] Or confirmed the default is suitable
+- [ ] **RULES.md** (5 min)
+  - [ ] Reviewed the default rules
+  - [ ] Made edits (with human approval) if this project's philosophy differs
+  - [ ] Or confirmed the defaults are suitable
 
 - [ ] **ai/methods/** (5 min)
   - [ ] Reviewed \`ai/methods/general.md\` — does it fit this project?

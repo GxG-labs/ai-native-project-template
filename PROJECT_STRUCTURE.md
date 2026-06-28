@@ -30,7 +30,6 @@ context/                ← background knowledge
 
 ai/                     ← AI operating layer
   README.md
-  constitution.md       ← operating principles
   context.md            ← stable facts AI needs across tasks
   methods/              ← how to approach types of work
     README.md
@@ -79,7 +78,10 @@ Every new project starts with this minimum:
 PROJECT.md
 README.md
 PROJECT_STRUCTURE.md
-CLAUDE.md / AGENTS.md / GEMINI.md
+RULES.md               ← agent behavior SSOT (human-curated)
+AGENTS.md              ← adapter: points to RULES.md
+CLAUDE.md              ← adapter: points to RULES.md
+GEMINI.md              ← adapter: points to RULES.md
 SECURITY.md
 PRIVACY.md
 .gitignore
@@ -87,7 +89,6 @@ PRIVACY.md
 
 ai/
   README.md
-  constitution.md
   context.md
   methods/
     general.md

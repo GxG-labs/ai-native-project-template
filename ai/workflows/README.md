@@ -15,7 +15,7 @@ Use workflows when you need to coordinate multiple methods, skills, and decision
 Guides a project from zero to operational in 6 phases:
 
 1. Define purpose and scope (PROJECT.md)
-2. Establish the AI operating layer (ai/context.md, ai/constitution.md)
+2. Establish the AI operating layer (RULES.md, ai/context.md)
 3. Discover and evaluate available skills and tools (SKILLS_REVIEW.md)
 4. Bootstrap core infrastructure (dev environment, CI/CD, security)
 5. Populate intent (first campaign or task)

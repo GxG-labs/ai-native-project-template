@@ -13,12 +13,12 @@ Bring a project back into alignment with its own source-of-truth rules. Treat `P
 
 Before auditing or changing anything, read these files in order from the project root:
 
-1. `PROJECT.md`
-2. `ai/README.md`
-3. `ai/constitution.md`
-4. `ai/project-context.md`
-5. `ai/instructions/general.md`
-6. `ai/instructions/organization.md`
+1. `RULES.md`
+2. `PROJECT.md`
+3. `ai/README.md`
+4. `ai/context.md`
+5. `ai/methods/general.md`
+6. `ai/methods/organization.md`
 7. `PROJECT_STRUCTURE.md`
 
 If any of these files are missing, damaged, or contradictory, stop broad reorganization and first repair or ask about the source of truth.

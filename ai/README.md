@@ -22,8 +22,8 @@ This workflow guides you through:
 
 Read in this order:
 
-1. `../PROJECT.md` — Why the project exists
-2. `constitution.md` — Operating principles
+1. `../RULES.md` — Operating rules (human-curated, agent behavior SSOT)
+2. `../PROJECT.md` — Why the project exists
 3. `context.md` — Stable facts AI should remember
 4. `methods/general.md` — How to approach work
 5. `methods/organization.md` — Where files belong
