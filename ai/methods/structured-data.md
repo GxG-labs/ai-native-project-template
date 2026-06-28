@@ -1,132 +1,105 @@
-# Structured Data Convention
+# Growing Registries: Structure Template
 
-How to create and maintain lists, schemas, and configuration files that AI agents and humans can understand without external context.
+When a file will accumulate records repeatedly (added by multiple contributors), make the pattern explicit so AI agents and new humans understand the rules without asking.
 
 ## Pattern
 
-Every structured data file must have this shape:
+Every growing registry file should have:
 
 ```
 # [File Title]
 
-## About
+## Scope
 
-What is this? (1–2 sentences)
-Why does it exist? (1 sentence)
+What records belong here?
+What does NOT belong here?
+When do you create a new entry (vs. updating existing)?
 
-## Schema
+## Structure
 
-Field name | Type | Required | Notes
---- | --- | --- | ---
-`name` | string | yes | 2–4 words
-`description` | string | yes | One sentence
-...
-
-Rules for adding entries (if not obvious from fields):
-- Rule 1
-- Rule 2
+[Fields, types, required vs. optional]
 
 ## Examples
 
-[Your actual data using the schema]
+One entry that IS valid:
+[example that shows correct structure + satisfies constraints]
+
+One entry that is NOT valid:
+[counter-example showing a mistake — wrong format, doesn't fit scope, etc.]
 ```
 
-## Why This Works for AI
+## Real Examples
 
-1. **Self-contained.** An LLM can read the file and understand the rules without searching elsewhere.
-2. **Explicit structure.** The schema section removes ambiguity about what's required vs. optional.
-3. **Clear scope.** The "About" section tells AI whether new content belongs here or in a different file.
-4. **Operational.** AI agents can generate new entries, validate existing ones, and suggest improvements using the schema as ground truth.
+### Content Pillars
 
-## Common Patterns
+```markdown
+# Content Pillars
 
-### Lists (Content Pillars, Blog Topics, Campaigns)
+## Scope
+Main thematic categories that organize our content.
+New content should fit into exactly one pillar.
+If new content doesn't fit any pillar → discuss if we need a new one (don't stretch existing definitions).
 
-```
-## Schema
+## Structure
+- **Name** (required): 2–4 words, distinct from others
+- **Purpose** (required): One sentence — what outcome does this drive?
+- **What fits** (required): 2–3 bullet examples of content that belongs here
 
-- **Name** (required): Short, memorable label
-- **Description** (required): One sentence on purpose
-- **Examples** (required): 2–3 concrete instances
-- **Notes** (optional): Edge cases or caveats
+## Examples
 
-Rules:
-- Entries should not overlap (if they do, consolidate)
-- New entries need [approver] sign-off before merging
-```
+### Valid: Thought Leadership
+- **Purpose:** Establish credibility through original research and opinions
+- **What fits:** Original analysis, contrarian takes, behind-the-scenes decisions
 
-### Configuration (Feature flags, API endpoints)
-
-```
-## Schema
-
-| Key | Value Type | Default | Purpose |
-|---|---|---|---|
-| `name` | string | — | Unique identifier |
-| `enabled` | boolean | false | Is this active? |
-
-Rules:
-- Changes to production flags require a deploy
-- Test all changes in staging first
+### Invalid (overlaps with another pillar)
+- **Purpose:** Interesting content
+- **What fits:** Random posts, anything related to our industry
 ```
 
-### Glossary (Domain terms, abbreviations)
+### Glossary (for multi-project teams)
 
-```
-## Schema
+```markdown
+# Shared Glossary
 
-- **Term** (required): The exact phrase used in this project
-- **Definition** (required): 1–2 sentences for someone new to the project
-- **Related** (optional): Cross-references to related terms
+## Scope
+Formal definitions for domain terms used across projects.
+Add a term if: (1) multiple projects reference it, (2) misunderstanding causes real bugs, (3) definition is non-obvious.
+Don't add: common English words, project-internal jargon.
 
-Rules:
-- One definition per term (if ambiguous, split into separate entries)
-- Keep definitions jargon-free
-```
+## Structure
+- **Term** (required): Exact phrase as used in code/docs
+- **Definition** (required): 1–2 sentences for someone new to the domain
+- **Example** (optional): How it's actually used
 
-## Before and After
+## Examples
 
-❌ **Without structure:**
-```
-# Topics
+### Valid: RLS (Row-Level Security)
+- **Definition:** Database-level authorization that filters data per user at query time
+- **Example:** "User sees only their own records because RLS enforces this in the database"
 
-Just add topics here as you think of them.
-
-- AI safety
-- Prompt engineering
-- Best practices
-- Tools
+### Invalid (too vague)
+- **Definition:** Security stuff
 ```
 
-✓ **With structure:**
-```
-# Topics
+## When to Apply This
 
-## About
-Recurring themes that organize our content. Each topic should have 2+ pieces planned or completed.
+✓ Content Pillars, Topic categories  
+✓ Skills / Workflows registry (growing list of capabilities)  
+✓ Glossary (formal domain terms shared across projects)  
+✓ Governance matrices (who can do what, approval rules)  
+✓ Any file where new entries follow a predictable pattern
 
-## Schema
-- **Name** (required): 2–3 words
-- **Focus** (required): What specific angle or outcome?
-- **Examples** (required): Existing or planned content for this topic
+## When NOT to Apply
 
-## Topics
+✗ Config files with standard formats (.env, .json, .yaml)  
+✗ Code files  
+✗ One-time files (PROJECT.md, charters)  
+✗ Narrative docs (essays, tutorials)  
+✗ Simple markdown lists that rarely change  
 
-| Name | Focus | Examples |
-|---|---|---|
-| Prompt Engineering | Practical techniques to improve model output | "5 prompt patterns", "When few-shot works" |
-| AI Safety | Responsible use and boundary-setting | "Rate-limiting guide", "Jailbreak taxonomy" |
-```
+## Why This Works
 
-## When to Use This
-
-- Any file that will grow (pillars, topics, glossary, config)
-- Files that AI agents will read or edit
-- Lists shared across multiple workflows
-- Data that needs version control and review
-
-## When NOT to Use This
-
-- One-off notes or temporary work (use `workbench/`)
-- Narrative docs where structure would harm readability (essays, tutorials)
-- Private or sensitive configuration (keep in `.env.local`, not in files)
+- **LLM agents** can generate new entries that follow the pattern
+- **Code review** can check if new entry violates constraints (e.g., overlapping categories)
+- **Humans** understand boundaries without context-jumping
+- **Prevents drift** — explicit rules catch scope creep early
