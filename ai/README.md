@@ -44,3 +44,12 @@ It does NOT contain:
 - Final deliverables or outputs (put in `../output/`)
 - Implementation code (put in `../src/` or equivalent)
 - Work in progress (put in `../output/drafts/`)
+
+## Reference Lists
+
+→ Use `references/` for curated lists of proven tools and repositories:
+
+- `references/VERIFIED_REPOSITORIES.md` — 7 proven repositories by domain (ML, Web, Data, DevOps, etc.)
+- `references/RECOMMENDED_MCP_SERVERS.md` — Top MCP servers to extend Claude capabilities
+
+Use these during **Phase 3 (Discover Skills)** of project initialization.
