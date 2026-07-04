@@ -2,14 +2,23 @@
 
 Shared AI operating layer for this project.
 
+## Entry Point
+
+For any agent working inside this project, the entry point is `../RULES.md`.
+This README is a map of the AI layer after the rules have routed the task.
+
+Do not copy this project's `RULES.md` path into global agents, workspace agents,
+platform prompts, or reusable skills by default. Those agents should stay
+project-agnostic until a task explicitly points them to this project.
+
 ## Starting a New Project?
 
-→ Read `workflows/initialize-project.md` (1.5 hours to full setup)
+→ Read `workflows/initialize-project.md` (about 1-5 hours to full setup)
 
 This workflow guides you through:
 1. Defining purpose and scope
 2. Setting up the AI layer
-3. Discovering and choosing skills to implement
+3. Optionally discovering and choosing skills to implement
 4. Bootstrapping core infrastructure
 5. Defining initial work
 6. Team alignment
@@ -20,7 +29,7 @@ This workflow guides you through:
 
 ## For Ongoing Work
 
-Read in this order:
+Read the universal context in this order:
 
 1. `../RULES.md` — Operating rules (human-curated, agent behavior SSOT)
 2. `../PROJECT.md` — Why the project exists
@@ -28,10 +37,11 @@ Read in this order:
 4. `methods/general.md` — How to approach work
 5. `methods/organization.md` — Where files belong
 
-Then load only what is relevant to the current task:
+Then classify the task using `../RULES.md` and load only the owner sources:
 
 - `methods/` — Task-type instructions and domain rules
 - `methods/skills-discovery.md` — When identifying repeatable procedures to document
+- `methods/structured-data.md` — Pattern for files where new records are added repeatedly
 - `skills/` — Executable, repeatable procedures
 - `workflows/` — Multi-step orchestrations
 - `checklists/` — Quality gates and verification lists
@@ -47,9 +57,9 @@ It does NOT contain:
 
 ## Reference Lists
 
-→ Use `references/` for curated lists of proven tools and repositories:
+→ `references/` contains curated lists of proven tools and repositories:
 
-- `references/VERIFIED_REPOSITORIES.md` — 7 proven repositories by domain (ML, Web, Data, DevOps, etc.)
-- `references/RECOMMENDED_MCP_SERVERS.md` — Top MCP servers to extend Claude capabilities
+- `references/VERIFIED_REPOSITORIES.md` — Proven repositories by domain (ML, Web, Data, DevOps, etc.)
+- `references/RECOMMENDED_MCP_SERVERS.md` — MCP servers to extend AI assistant capabilities
 
-Use these during **Phase 3 (Discover Skills)** of project initialization.
+Use these during optional **Phase 3 (Discover Skills)** of project initialization.

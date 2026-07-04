@@ -1,6 +1,6 @@
 # Skills Review — Example (AI-Native SaaS Platform)
 
-This is an example of a completed SKILLS_REVIEW.md from a hypothetical AI-native SaaS platform project. Use it as a template for your own project.
+This is an example of an optional skills review from a hypothetical AI-native SaaS platform project. Use it as a template when reusable practice selection is a real early decision.
 
 **Completed**: June 1, 2025  
 **Team**: Sarah (PM), Alex (Tech Lead), Maya (Design)  

@@ -1,6 +1,6 @@
 # Verified Repositories — Starter Pack
 
-Семь проверенных репозиториев с хорошо задокументированными практиками и скиллами. Используй эти как отправную точку в Фазе 3 инициализации (`ai/workflows/initialize-project.md`).
+Семь стартовых кандидатов с хорошо задокументированными практиками и скиллами. Используй их как отправную точку в опциональной Фазе 3 инициализации (`ai/workflows/initialize-project.md`), но проверяй актуальность перед внедрением.
 
 Каждый репозиторий включает конкретные скиллы, которые можно адаптировать для вашего проекта.
 
@@ -84,7 +84,7 @@
 **Fit для новых проектов**: ⭐⭐⭐⭐  
 **Effort to implement**: Low (1 день — это просто reference)
 
-**Как использовать**: Добавь ссылку в `CLAUDE.md`, используй как reference при code review.
+**Как использовать**: Добавь ссылку в проектную документацию или используй как reference при code review.
 
 ---
 
@@ -130,11 +130,11 @@
 
 ---
 
-## 7. **Anthropic Cookbook** — AI/LLM Applications
+## 7. **LLM Application Cookbook** — AI/LLM Applications
 **Repo**: https://github.com/anthropics/anthropic-cookbook
 
 **Домен**: LLM Applications, AI Workflows, Agents  
-**Когда использовать**: Проекты с Claude API, RAG, agents, prompting
+**Когда использовать**: Проекты с LLM API, RAG, agents, prompting
 
 **Ключевые скиллы**:
 - Prompt engineering patterns
@@ -160,14 +160,14 @@
    - Web app? → Vercel Next.js + Google styleguide
    - DevOps? → Kubernetes examples
    - IDE tool? → VS Code samples
-   - LLM app? → Anthropic cookbook
+   - LLM app? → LLM application cookbook
 
 2. **Оцени fit-score** для каждого:
    - 5 = Решает критическую задачу, низкий effort
    - 4 = Важно, но можно отложить
    - 3 = Полезно, но не блокирует
 
-3. **Создай SKILLS_REVIEW.md** со своей оценкой:
+3. **Если выбор нетривиален, создай `intent/skills-review.md` со своей оценкой:**
    ```
    | Repository | Domain | Fit | Effort | Phase |
    | andrej-karpathy-skills | ML | 5 | 2 дня | Phase 0 |
@@ -181,13 +181,13 @@
 
 ---
 
-## Критерии Верификации
+## Критерии Перед Внедрением
 
-Каждый репозиторий в этом списке:
+Перед внедрением проверь каждый репозиторий из этого списка:
 
-- ✅ **Активно поддерживается** (обновления в последние 3 месяца)
+- ✅ **Активно поддерживается** для твоего сценария
 - ✅ **Хорошо задокументирован** (README, примеры, wiki)
-- ✅ **Проверен на практике** (использован в реальных проектах)
+- ✅ **Имеет признаки практического использования**
 - ✅ **Адаптируем** (не требует полной переписи твоего кода)
 - ✅ **Масштабируем** (работает от MVP до production)
 
@@ -201,7 +201,7 @@
 2. Напиши short summary (домен, ключевые скиллы, fit-score)
 3. Создай PR с добавлением в этот файл
 
-Цель: держать этот список из **проверенных, действительно полезных** репозиториев, а не просто длинного списка всего подряд.
+Цель: держать этот список из **сильных стартовых кандидатов**, а не просто длинного списка всего подряд.
 
 ---
 
@@ -209,4 +209,4 @@
 
 - `ai/workflows/initialize-project.md` — Полный workflow инициализации (Фаза 3)
 - `ai/methods/skills-discovery.md` — Как оценивать скиллы и репозитории
-- `examples/SKILLS_REVIEW_example.md` — Пример заполненной SKILLS_REVIEW.md
+- `ai/workflows/skills-review-example.md` — Пример заполненного skills review

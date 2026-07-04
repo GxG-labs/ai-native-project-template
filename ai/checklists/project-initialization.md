@@ -2,7 +2,7 @@
 
 Use this checklist to ensure a new project is fully set up and ready for productive work.
 
-**Timeline**: ~2-3 hours for Phases 1-3, plus variable time for Phase 4
+**Timeline**: ~1 hour for Phases 1-2, plus optional skills discovery and variable time for Phase 4
 
 **Owner**: [Project lead name]  
 **Started**: [Date]  
@@ -65,17 +65,21 @@ Use this checklist to ensure a new project is fully set up and ready for product
   - [ ] Reviewed the default rules
   - [ ] Made edits (with human approval) if this project's philosophy differs
   - [ ] Or confirmed the defaults are suitable
+  - [ ] Confirmed important project rules are reachable from `RULES.md`
+  - [ ] Confirmed tool-specific adapters stay thin and point to `RULES.md`
+  - [ ] Confirmed no global/workspace/platform agent was given an absolute path
+        to this project unless a human explicitly requested a project-specific agent
 
 - [ ] **ai/methods/** (5 min)
-  - [ ] Reviewed \`ai/methods/general.md\` — does it fit this project?
-  - [ ] Reviewed \`ai/methods/organization.md\` — does it fit this project?
+  - [ ] Reviewed `ai/methods/general.md` — does it fit this project?
+  - [ ] Reviewed `ai/methods/organization.md` — does it fit this project?
   - [ ] Noted any deviations for later
 
 **Phase 2 Sign-Off**: [Name] on [Date] — AI layer is set up and understood
 
 ---
 
-## Phase 3: Discover Skills & Tools
+## Phase 3: Discover Skills & Tools (Optional)
 
 - [ ] **Identify candidate repositories** (20 min)
   - [ ] Listed 3-5 repositories relevant to project domain
@@ -86,8 +90,9 @@ Use this checklist to ensure a new project is fully set up and ready for product
   - [ ] Scored each candidate on problem-fit, effort, maintenance, fit
   - [ ] Documented which skills would unblock work
   - [ ] Noted which skills are nice-to-have
+  - [ ] Classified each candidate as single skill, skill family, composite skill, workflow, or method before creating folders
 
-- [ ] **Create SKILLS_REVIEW.md** (10 min)
+- [ ] **Create `intent/skills-review.md` if needed** (10 min)
   - [ ] Listed all candidates with fit scores
   - [ ] Assigned each to Phase 0, Phase 1, Phase 2, or Deferred
   - [ ] Team has reviewed and agreed on priorities
@@ -97,7 +102,7 @@ Use this checklist to ensure a new project is fully set up and ready for product
   - [ ] Team understands why some skills were deferred
   - [ ] No one feels surprised by the decisions
 
-**Phase 3 Sign-Off**: [Name] on [Date] — SKILLS_REVIEW.md is complete and agreed
+**Phase 3 Sign-Off**: [Name] on [Date] — Skills review is complete if this project needs one
 
 ---
 
@@ -108,14 +113,14 @@ This phase depends heavily on project type. Check only what applies:
 ### If this is a software project:
 
 - [ ] **Development environment** (30 min - 2 hours)
-  - [ ] \`README.md\` explains how to set up local dev
+  - [ ] `README.md` explains how to set up local dev
   - [ ] Dev environment works for all team members
   - [ ] Dependencies are documented (language version, package manager, system tools)
-  - [ ] \`Makefile\` or equivalent script automates setup
+  - [ ] `Makefile` or equivalent script automates setup
 
 - [ ] **Version control** (15 min)
-  - [ ] \`.gitignore\` is set up
-  - [ ] \`.env.example\` shows required environment variables
+  - [ ] `.gitignore` is set up
+  - [ ] `.env.example` shows required environment variables
   - [ ] Initial commit is clean (no secrets, binaries, or generated files)
 
 - [ ] **Continuous Integration** (1-2 hours if Phase 0, else defer)
@@ -125,7 +130,7 @@ This phase depends heavily on project type. Check only what applies:
   - [ ] Configuration is documented
 
 - [ ] **Code organization** (30 min)
-  - [ ] Folder structure matches \`PROJECT_STRUCTURE.md\`
+  - [ ] Folder structure matches `PROJECT_STRUCTURE.md`
   - [ ] No random root-level files
   - [ ] Clear separation between intent, context, output, and code
 
@@ -148,12 +153,12 @@ This phase depends heavily on project type. Check only what applies:
 ### For all projects:
 
 - [ ] **Security review** (20 min)
-  - [ ] \`SECURITY.md\` is populated with basic rules
+  - [ ] `SECURITY.md` is populated with basic rules
   - [ ] Team understands what's off-limits
   - [ ] No secrets are checked in
 
 - [ ] **Privacy review** (20 min)
-  - [ ] \`PRIVACY.md\` is populated with basic commitments
+  - [ ] `PRIVACY.md` is populated with basic commitments
   - [ ] Team understands data handling rules
   - [ ] GDPR/CCPA implications noted (if applicable)
 
@@ -163,9 +168,9 @@ This phase depends heavily on project type. Check only what applies:
   - [ ] Pull request or review process is documented
 
 - [ ] **AI layer populated** (30 min)
-  - [ ] \`ai/methods/\` has been reviewed and updated
-  - [ ] \`ai/skills/\` includes at least one reusable procedure (or is marked as "to be populated")
-  - [ ] \`ai/workflows/\` includes this initialization workflow for reference
+  - [ ] `ai/methods/` has been reviewed and updated
+  - [ ] `ai/skills/` includes at least one reusable procedure (or is marked as "to be populated")
+  - [ ] `ai/workflows/` includes this initialization workflow for reference
 
 **Phase 4 Sign-Off**: [Name] on [Date] — Core infrastructure works and is documented
 
@@ -173,14 +178,10 @@ This phase depends heavily on project type. Check only what applies:
 
 ## Phase 5: Populate Intent
 
-- [ ] **intent/README.md** (5 min)
-  - [ ] Explains what goes in this folder
-  - [ ] Notes if work is organized by campaign or task
-
-- [ ] **First campaign or task** (15 min)
-  - [ ] Created \`intent/campaigns/[campaign-name]/\` or \`intent/tasks/[task-name].md\` for the first major piece of work
+- [ ] **First campaign or task** (20 min)
+  - [ ] Created `intent/campaigns/[campaign-name]/` or `intent/tasks/[task-name].md` for the first major piece of work
   - [ ] Brief clearly states the goal and success criteria
-  - [ ] Links back to relevant \`PROJECT.md\` success criteria
+  - [ ] Links back to relevant `PROJECT.md` success criteria
 
 - [ ] **Team alignment** (10 min)
   - [ ] Team has read the first campaign/task brief
@@ -195,7 +196,7 @@ This phase depends heavily on project type. Check only what applies:
 
 - [ ] **Full project review** (30 min)
   - [ ] Walk through PROJECT.md with the team
-  - [ ] Walk through SKILLS_REVIEW.md — confirm Phase 0 & 1 priorities
+  - [ ] Walk through skills review notes, if they exist — confirm Phase 0 & 1 priorities
   - [ ] Walk through the first campaign/task
 
 - [ ] **Assign first work items** (20 min)
@@ -210,7 +211,7 @@ This phase depends heavily on project type. Check only what applies:
 
 - [ ] **Document deviations** (10 min)
   - [ ] Note any ways this project deviates from the template
-  - [ ] Add a README section or update CLAUDE.md if relevant
+  - [ ] Add a README section or project-specific note if relevant
   - [ ] Future team members should understand the choice
 
 - [ ] **Confirm tools & access** (15 min)
@@ -227,22 +228,22 @@ This phase depends heavily on project type. Check only what applies:
 After initialization is complete:
 
 - [ ] Archive this checklist or mark as done
-- [ ] Update \`CLAUDE.md\` or project-specific CLAUDE.md with any deviations from the template
-- [ ] Move Phase 1 & 2 skills into \`ai/skills/\` as they become reusable
-- [ ] Review SKILLS_REVIEW.md quarterly; promote skills from Phase 2 to Phase 1 if priorities shift
+- [ ] Document deviations from the template in README or another project-owned document
+- [ ] Move Phase 1 & 2 skills into `ai/skills/` as they become reusable
+- [ ] Review `intent/skills-review.md` quarterly if it exists; promote skills from Phase 2 to Phase 1 if priorities shift
 
 ---
 
 ## Troubleshooting
 
 **"We don't have time to do all this"**
-→ Do Phases 1-3 only (1.5 hours). Phase 4-6 can happen gradually as you build.
+→ Do Phases 1-2 first. Phase 3 is optional; Phases 4-6 can happen gradually as you build.
 
 **"Some of our team disagreed on purpose"**
 → Pause before Phase 4. Clarify PROJECT.md. A misaligned team will thrash.
 
 **"We can't find any relevant skills to implement"**
-→ That's OK. Leave SKILLS_REVIEW.md with "Phase 1: TBD — to be identified as patterns emerge". Revisit after your first sprint.
+→ That's OK. Skip `intent/skills-review.md` and revisit after your first sprint.
 
 **"This feels like extra work before we start"**
 → It is — by design. Clear intent now saves 10x the rework later. Most projects spend more time on misalignment than on initialization.
@@ -255,11 +256,11 @@ After initialization is complete:
 |---|---|---|
 | 1: Define Purpose | ~30 min | Completed PROJECT.md |
 | 2: Operating Layer | ~20 min | Populated ai/context.md |
-| 3: Discover Skills | ~45 min | Completed SKILLS_REVIEW.md |
+| 3: Discover Skills | Optional, ~15-45 min | Optional `intent/skills-review.md` |
 | 4: Bootstrap | Variable | Working dev environment |
 | 5: Populate Intent | ~20 min | First task/brief |
 | 6: Kickoff | ~1.5 hours | Team alignment |
-| **Phases 1-3** | **~1.5 hours** | **Ready to build** |
+| **Phases 1-2** | **~1 hour** | **Ready to define first work** |
 | **All phases** | **3-5 hours + project setup** | **Fully operational** |
 
-Start Phases 1-3 immediately. Phase 4 depends on your project type; Phases 5-6 happen in parallel with Phase 4.
+Start with Phases 1-2. Use Phase 3 only when reusable practices need an explicit decision. Phase 4 depends on your project type; Phases 5-6 happen in parallel with Phase 4.

@@ -9,13 +9,36 @@ A skill is a documented, repeatable procedure that:
 1. **Solves a specific problem** your team encounters repeatedly (e.g., "set up a new API endpoint", "create a test suite", "write structured data templates")
 2. **Has clear steps** that can be followed mechanically, with minimal decision-making
 3. **Reduces friction** compared to doing it ad-hoc each time
-4. **Lives in \`ai/skills/\`** where it's easy to find and reuse
+4. **Lives in `ai/skills/`** where it's easy to find and reuse
 
 Skills are NOT:
 - One-off scripts or utilities
 - Raw source code or implementation details
-- General-purpose frameworks (those go in \`src/\` or \`docs/\`)
+- General-purpose frameworks (those go in `src/` or `docs/`)
 - Incomplete experiments or work-in-progress ideas
+
+---
+
+## Classify the Shape Before Importing
+
+Before creating or importing a skill, decide what kind of component it really is. Do this before naming folders or writing `SKILL.md`.
+
+| Shape | Use When | Put It In |
+|---|---|---|
+| **Single skill** | One repeatable procedure with one clear job and one main output | `ai/skills/[skill-name]/SKILL.md` |
+| **Skill family** | Several related procedures share a domain but can be used independently | `ai/skills/[domain-or-family]/[skill-name]/SKILL.md` |
+| **Composite skill** | One named capability coordinates several nested skills and may also be invoked as the entry point | `ai/skills/[composite-name]/SKILL.md` plus nested skill folders |
+| **Workflow** | A fixed multi-step orchestration across skills, tools, methods, or human decisions | `ai/workflows/[workflow-name].md` |
+| **Method** | Guidance for deciding how to approach a type of work, not an executable procedure | `ai/methods/[method-name].md` |
+
+Use this test:
+
+1. If the name describes a broad outcome but the content describes only one step, rename the step or create a composite parent.
+2. If the procedure has stages that can be reused independently, make those stages separate nested skills.
+3. If the value is in sequencing several components, document the sequence as a composite skill or workflow rather than hiding it inside one step.
+4. If two files would need the same name to make sense, the hierarchy is wrong. Rename the narrower component.
+
+Example: `optimizing-seo-aeo-geo-content` is broad if it includes research, article architecture, drafting, editing, and audit. In that case, make it a composite parent and put narrower skills such as `researching-content`, `writing-articles`, and `editing-seo-aeo-geo-content` inside it.
 
 ---
 
@@ -69,17 +92,17 @@ For each candidate skill or pattern, score it on:
 
 **Decision matrix:**
 
-\`\`\`
+```
 Effort Low, Fit High, Maintenance Low, Strategic High → IMPLEMENT IMMEDIATELY
 Effort Low, Fit High, Maintenance High, Strategic Low → IMPLEMENT IF TIME PERMITS
 Effort High, Fit High, Maintenance Low, Strategic High → IMPLEMENT SOON (PHASE 1)
 Effort High, Fit High, Maintenance High, Strategic High → IMPLEMENT GRADUALLY (PHASE 2+)
 Effort High, Fit Low, Maintenance High, Strategic Low → SKIP
-\`\`\`
+```
 
 ### Step 4: Prioritize by Phase
 
-Organize decisions into phases, as defined in the \`initialize-project.md\` workflow:
+For larger projects, organize decisions into phases, as defined in the `initialize-project.md` workflow:
 
 **Phase 0 (Right Now)**: Skills that block other work
 - Example: "Create a new API endpoint" (must work before building features)
@@ -97,9 +120,9 @@ Organize decisions into phases, as defined in the \`initialize-project.md\` work
 
 ## Documenting a Skill
 
-Once you've decided to implement a skill, create a file in \`ai/skills/\` following this structure:
+Once you've decided to implement a skill, create a file in `ai/skills/` following this structure:
 
-\`\`\`markdown
+```markdown
 # [Skill Name]
 
 **Problem**: [What repeating task does this solve?]
@@ -130,7 +153,7 @@ Once you've decided to implement a skill, create a file in \`ai/skills/\` follow
 
 - [Link to related skill or documentation]
 - [Link to external standard or example]
-\`\`\`
+```
 
 ---
 
@@ -145,7 +168,7 @@ Once you've decided to implement a skill, create a file in \`ai/skills/\` follow
 
 ## Connecting Skills to Project Goals
 
-Map each skill to the project's goals from \`PROJECT.md\`:
+Map each skill to the project's goals from `PROJECT.md`:
 
 Example:
 
@@ -185,17 +208,17 @@ Example:
 > **Skill**: Create a New API Endpoint
 > 
 > **Steps**:
-> 1. Copy \`src/api/templates/endpoint.ts\` to \`src/api/[feature]/index.ts\`
-> 2. Replace \`{FEATURE}\` with your feature name
-> 3. Update \`src/api/index.ts\` to export your endpoint
-> 4. Run tests: \`npm test -- api/[feature]\`
+> 1. Copy `src/api/templates/endpoint.ts` to `src/api/[feature]/index.ts`
+> 2. Replace `{FEATURE}` with your feature name
+> 3. Update `src/api/index.ts` to export your endpoint
+> 4. Run tests: `npm test -- api/[feature]`
 > 
-> **Reference implementation**: See \`src/api/users/\` for a complete example
+> **Reference implementation**: See `src/api/users/` for a complete example
 
 ---
 
 ## Links & Examples
 
-- See \`ai/workflows/initialize-project.md\` for the full project initialization workflow, including the skills discovery phase
+- See `ai/workflows/initialize-project.md` for the full project initialization workflow, including the skills discovery phase
 - Example skills repository: https://github.com/multica-ai/andrej-karpathy-skills (ML/AI focused)
-- Related: \`ai/methods/organization.md\` — where to place skills in the project structure
+- Related: `ai/methods/organization.md` — where to place skills in the project structure

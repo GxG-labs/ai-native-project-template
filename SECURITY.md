@@ -8,5 +8,4 @@ Security rules:
 - Use `.env.example` to document required environment variables.
 - Keep real environment files local and ignored by Git.
 - Treat local databases, raw exports, and client files as sensitive unless explicitly classified otherwise.
-- Before publishing, review `.gitignore`, `PRIVACY.md`, `artifacts/`, `data/`, `references/`, and `tmp/`.
-
+- Before publishing, review `.gitignore`, `PRIVACY.md`, `output/`, `data/`, `context/sources/`, and `tmp/`.

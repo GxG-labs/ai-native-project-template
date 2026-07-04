@@ -1,12 +1,12 @@
 # Recommended MCP Servers — Essential Tools
 
-Топовые MCP (Model Context Protocol) серверы, которые имеют смысл добавить в большинство проектов. Эти серверы расширяют возможности Claude Code и других AI инструментов.
+MCP (Model Context Protocol) серверы, которые могут иметь смысл для проектов с активной AI-автоматизацией. Проверяй совместимость с конкретным AI-клиентом перед внедрением.
 
 ---
 
 ## 1. **Context 7** — Documentation & Framework Lookup
 **Status**: ✅ Production-ready  
-**Integration**: Via `claude-api` skill
+**Integration**: Via MCP-capable AI client
 
 **Домен**: Documentation, API References, Framework Knowledge  
 **Когда использовать**: Для любого проекта с внешними зависимостями
@@ -34,7 +34,7 @@
 
 ---
 
-## 2. **Claude-in-Chrome** — Browser Automation
+## 2. **Browser Automation MCP** — Browser Automation
 **Status**: ✅ Production-ready  
 **Integration**: Via browser automation tools
 
@@ -50,9 +50,9 @@
 
 **Setup**:
 ```
-1. Install Claude Code extension in Chrome
-2. Grant site-level permissions
-3. Use mcp__claude-in-chrome__* tools in tasks
+1. Install the browser automation tool supported by your AI client
+2. Grant site-level permissions only for the sites needed
+3. Use it for visual verification, form workflows, and browser-based testing
 ```
 
 **Когда это экономит время**: 
@@ -226,7 +226,7 @@ gh auth login  # One-time setup
 | MCP Server | Setup Effort | Benefit | Priority |
 |---|---|---|---|
 | **Context 7** | 0 min | Documentation instant access | 🔴 Must-Have |
-| **Claude-in-Chrome** | 5 min | Visual testing + automation | 🔴 Must-Have (if frontend) |
+| **Browser Automation MCP** | 5-15 min | Visual testing + automation | 🔴 Must-Have (if frontend) |
 | **WebFetch/Search** | 0 min | Current external info | 🟡 Should-Have |
 | **GitHub API** | 5 min | Repo automation | 🟡 Should-Have |
 | **Google Drive/Sheets** | 10 min | Cloud integration | 🟢 Nice-to-Have |
@@ -238,28 +238,16 @@ gh auth login  # One-time setup
 
 ## How to Add to Your Project
 
-### In CLAUDE.md or AGENTS.md:
+### Document Project Choices
 
-```markdown
-## MCP Servers
+If a project standardizes on MCP servers, document the choice in project-owned documentation, not in thin AI adapter files such as `AGENTS.md`, `CLAUDE.md`, or `GEMINI.md`.
 
-We use these MCP servers to extend Claude's capabilities:
-
-1. **Context 7** — Documentation lookup (auto-loaded)
-2. **Claude-in-Chrome** — Browser automation for testing
-3. **WebFetch/WebSearch** — External information lookup
-4. **GitHub API** — PR/issue automation (via gh command)
-5. **Slack** — Team notifications
-
-Setup instructions in: `ai/references/RECOMMENDED_MCP_SERVERS.md`
-```
-
-### Enable in Claude Code Settings:
+Example:
 
 ```json
 {
   "mcp": {
-    "enabled": ["context7", "claude-in-chrome", "github"],
+    "enabled": ["context7", "browser-automation", "github"],
     "maxRetries": 3,
     "timeout": 30000
   }
@@ -275,7 +263,7 @@ Setup instructions in: `ai/references/RECOMMENDED_MCP_SERVERS.md`
 - WebFetch/Search — для исследования (если нужно)
 
 **Фаза 1** (MVP):
-- Claude-in-Chrome — если есть frontend
+- Browser Automation MCP — если есть frontend
 - GitHub API — для automation
 
 **Фаза 2+** (post-MVP):
@@ -300,6 +288,6 @@ Setup instructions in: `ai/references/RECOMMENDED_MCP_SERVERS.md`
 
 ## Related Files
 
-- `ai/references/VERIFIED_REPOSITORIES.md` — Verified code repositories
-- `CLAUDE.md` / `AGENTS.md` — Project-specific tool configuration
-- `/config` — Claude Code settings for MCP servers
+- `ai/references/VERIFIED_REPOSITORIES.md` — Starter repository candidates
+- AI client settings — tool-specific MCP configuration
+- Project README or docs — human-readable tool choices

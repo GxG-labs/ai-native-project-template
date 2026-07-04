@@ -14,9 +14,7 @@ tmp/
 
 # Workbench contents are local by default.
 workbench/input/*
-!workbench/input/README.md
-workbench/output/*
-!workbench/output/README.md
+!workbench/input/.gitkeep
 
 # Logs
 *.log

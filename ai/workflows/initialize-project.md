@@ -36,13 +36,23 @@ Update `ai/context.md` with stable facts that all AI work should remember:
 
 Update `RULES.md` if the default principles don't fit this project's philosophy (human must approve the edit).
 
+Check the operating layer:
+
+- Important project rules and architectural decisions are reachable from
+  `RULES.md` either directly or through a clear routing rule.
+- Tool-specific adapters such as `AGENTS.md`, `CLAUDE.md`, and `GEMINI.md`
+  remain thin pointers to `RULES.md`.
+- Global, workspace, platform, and reusable agents remain project-agnostic by
+  default. Give them an absolute path to this project only when a human
+  explicitly asks for a project-specific agent.
+
 Output: A usable `ai/context.md` that prevents AI from making harmful assumptions.
 
 ---
 
-## Phase 3: Discover Available Skills & Tools (45 min)
+## Phase 3: Discover Available Skills & Tools (Optional, 15-45 min)
 
-Skills are repeatable procedures that can accelerate work. Before building, review what already exists.
+Skills are repeatable procedures that can accelerate work. Use this phase when the project has several reusable practices, libraries, templates, or external repositories to choose between before work starts. For small projects, skip this phase and capture obvious reusable practices in the first brief.
 
 ### Step 3a: Identify Candidate Repositories
 
@@ -61,11 +71,11 @@ Based on your project's goals from Phase 1, identify 3-5 repositories or skill c
 - Consultant/agency playbooks
 
 Record candidates with:
-\`\`\`
+```
 | Repository | Domain | Why Relevant | Link |
 |---|---|---|---|
 | example-repo | ML/AI | Feature engineering patterns | https://github.com/... |
-\`\`\`
+```
 
 ### Step 3b: Evaluate Skills Against Project Goals
 
@@ -78,13 +88,13 @@ For each candidate, ask:
 
 Create an evaluation table:
 
-\`\`\`
+```
 | Skill | Problem It Solves | Effort to Implement | Ongoing Maintenance | Fit Score (1-5) | Decision |
 |---|---|---|---|---|---|
 | Example: Data pipeline templates | Repeatable data ETL | 2-3 days | Low | 4 | IMPLEMENT NOW |
 | Example: Frontend component kit | UI consistency | 1 week | Medium | 3 | IMPLEMENT LATER |
 | Example: DevOps CI/CD | Release automation | 3-4 days | Medium | 5 | IMPLEMENT NOW |
-\`\`\`
+```
 
 **Scoring guidance:**
 - **5 = Implement immediately**: Solves critical friction, low effort, clear fit
@@ -101,7 +111,9 @@ Organize decisions into phases:
 - **Phase 1 (MVP launch)**: Skills that unlock the core product value
 - **Phase 2 (post-MVP)**: Quality, scale, and nice-to-have improvements
 
-Output: A \`SKILLS_REVIEW.md\` with your evaluation and phase assignments (see template below).
+Output for larger projects: an optional `intent/skills-review.md` with your evaluation and phase assignments (see template below).
+
+For smaller projects: add a short "Reusable practices to consider" section to the first brief in `intent/`.
 
 ---
 
@@ -109,12 +121,12 @@ Output: A \`SKILLS_REVIEW.md\` with your evaluation and phase assignments (see t
 
 Implement Phase 0 skills in order:
 
-1. **Project structure**: Ensure folders match \`PROJECT_STRUCTURE.md\`
+1. **Project structure**: Ensure folders match `PROJECT_STRUCTURE.md`
 2. **Development environment**: If applicable, set up local dev, containers, or build tooling
 3. **CI/CD pipeline**: Add automated checks (tests, type checking, security scans)
 4. **Collaboration rules**: Document how the team will work (e.g., PR process, code review, communication)
-5. **AI operating layer**: Populate \`ai/methods/\`, \`ai/skills/\`, \`ai/workflows/\` with reusable patterns
-6. **Security**: Review and complete \`SECURITY.md\` and \`PRIVACY.md\`
+5. **AI operating layer**: Populate `ai/methods/`, `ai/skills/`, `ai/workflows/` with reusable patterns
+6. **Security**: Review and complete `SECURITY.md` and `PRIVACY.md`
 
 Only implement skills that unblock other work. Everything else goes into Phase 1 or 2.
 
@@ -126,10 +138,9 @@ Output: A functional development environment and documented AI layer.
 
 Create the first campaign or task:
 
-1. Add \`intent/README.md\` if not present
-2. Create \`intent/campaigns/\` subfolder if this is longer-term work (e.g., a product launch, research project)
-3. Write the first brief or task definition that articulates what the team is building
-4. Link it to the success criteria from \`PROJECT.md\`
+1. Create `intent/campaigns/` subfolder if this is longer-term work (e.g., a product launch, research project)
+2. Write the first brief or task definition that articulates what the team is building
+3. Link it to the success criteria from `PROJECT.md`
 
 Output: Clear written intent that drives Phase 1 work.
 
@@ -146,11 +157,11 @@ Output: Alignment, clear next steps, and a working team.
 
 ---
 
-## Template: SKILLS_REVIEW.md
+## Optional Template: `intent/skills-review.md`
 
-Use this template to record your skills discovery and decisions:
+Use this template when skills discovery is substantive enough to deserve its own file:
 
-\`\`\`markdown
+```markdown
 # Skills Review
 
 Completed: [DATE]
@@ -197,13 +208,13 @@ Repositories we decided NOT to implement (and why):
 1. [First implementation task]
 2. [Second implementation task]
 3. [Review and align with team by DATE]
-\`\`\`
+```
 
 ---
 
 ## When to Use This Workflow
 
-- **New projects**: Run the full workflow (Phases 1-6) before starting any substantive work
+- **New projects**: Run Phases 1-2 before starting substantive work, then use later phases as needed
 - **Existing projects**: Jump to Phase 3 (Discover Skills) when you realize processes are ad-hoc or repeated
 - **Major pivots**: Re-run Phase 1 (Define Purpose) and Phase 3 (Discover Skills) to realign
 
@@ -224,10 +235,10 @@ Repositories we decided NOT to implement (and why):
 |---|---|---|
 | 1: Define Purpose | 30 min | Completed PROJECT.md |
 | 2: Operating Layer | 20 min | Populated ai/context.md |
-| 3: Discover Skills | 45 min | Completed SKILLS_REVIEW.md |
+| 3: Discover Skills | Optional, 15-45 min | Optional `intent/skills-review.md` or brief section |
 | 4: Bootstrap | Variable | Working dev environment |
 | 5: Populate Intent | 20 min | First task/brief |
 | 6: Kickoff | 1-2 hours | Team alignment |
-| **Total (Phases 1-3)** | **1.5 hours** | **Ready to build** |
+| **Minimum (Phases 1-2)** | **~50 min** | **Ready to define first work** |
 
-Start with Phases 1-3 (1.5 hours). Phase 4 depends on your project type; Phase 5-6 happen in parallel.
+Start with Phases 1-2. Use Phase 3 when choosing reusable practices is a real decision, not a ritual. Phase 4 depends on your project type; Phase 5-6 happen in parallel.

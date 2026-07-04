@@ -1,37 +1,38 @@
 # Project Initialization — Quick Start
 
-New to this template? Use this guide to get your project off the ground in 1.5-5 hours.
+New to this template? Use this guide to get your project off the ground in about 1-5 hours.
 
 ## What You're About to Do
 
 You're going to:
 1. Define why your project exists
-2. Decide which repeatable processes (skills) to implement
+2. Decide whether any repeatable processes need to be standardized now
 3. Set up your project structure and AI operating layer
 4. Get your team on the same page
 
 This prevents misalignment and rework later.
 
-## The 1.5-Hour Path (Phases 1-3 Only)
+## The Fast Path (Phases 1-2)
 
-If you're in a hurry, start with these three phases. They take ~90 minutes and will get you ready to build.
+If you're in a hurry, start with these two phases. They take about 50 minutes and get the project ready for its first real brief.
 
 **Phase 1: Define Purpose (30 min)**
-1. Open \`PROJECT.md\`
+1. Open `PROJECT.md`
 2. Fill in each section: Why, Job, Final Result, Good Result Now, Success Criteria, Non-Goals, Decision Preferences, Current Focus
 3. **Output**: You can now explain to anyone why this project should exist
 
 **Phase 2: Set Up AI Layer (20 min)**
-1. Open \`ai/context.md\`
+1. Open `ai/context.md`
 2. Add: project purpose, target users, key constraints, glossary, assumptions
 3. **Output**: AI assistants (and new team members) know what not to assume
 
-**Phase 3: Discover & Choose Skills (45 min)**
-1. Read \`ai/methods/skills-discovery.md\` (~10 min)
-2. Identify 3-5 relevant repositories or skill collections for your domain
+**Optional Phase 3: Discover & Choose Skills (15-45 min)**
+1. Read `ai/methods/skills-discovery.md` (~10 min)
+2. Identify relevant repositories or skill collections only if they affect early decisions
 3. Score each on fit, effort, and maintenance
-4. Create \`SKILLS_REVIEW.md\` using the template in \`ai/workflows/initialize-project.md\`
-5. **Output**: You've made explicit decisions about which practices to standardize
+4. For large projects, create `intent/skills-review.md` using the template in `ai/workflows/initialize-project.md`
+5. For small projects, add "Reusable practices to consider" to the first brief
+6. **Output**: You've made explicit decisions about which practices to standardize, if any
 
 → **You're now ready to build.** Proceed with Phase 4, or skip to your first sprint.
 
@@ -50,7 +51,7 @@ For a more complete setup, continue with Phases 4-6:
 - Link it to success criteria in PROJECT.md
 
 **Phase 6: Kickoff (1.5 hours)**
-- Team review of PROJECT.md and SKILLS_REVIEW.md
+- Team review of PROJECT.md and any skills review notes
 - Assign first work items
 - Confirm alignment and tools
 
@@ -59,20 +60,20 @@ For a more complete setup, continue with Phases 4-6:
 ## The Files You'll Read & Edit
 
 ### Must Read First
-- \`PROJECT.md\` — The one file everyone reads (filled in during Phase 1)
+- `PROJECT.md` — The one file everyone reads (filled in during Phase 1)
 
 ### During Initialization
-- \`ai/workflows/initialize-project.md\` — The full 6-phase workflow
-- \`ai/methods/skills-discovery.md\` — How to evaluate skills for your domain
-- \`ai/checklists/project-initialization.md\` — Detailed checklist for each phase
+- `ai/workflows/initialize-project.md` — The full 6-phase workflow
+- `ai/methods/skills-discovery.md` — How to evaluate skills for your domain
+- `ai/checklists/project-initialization.md` — Detailed checklist for each phase
 
 ### Will Create
-- \`SKILLS_REVIEW.md\` — Your decisions about which skills to implement (created in Phase 3)
-- \`ai/context.md\` — What AI assistants should remember (filled in Phase 2)
+- `ai/context.md` — What AI assistants should remember (filled in Phase 2)
+- `intent/skills-review.md` — Optional decisions about reusable practices for larger projects
 
 ### May Update
-- \`RULES.md\` — Operating principles (human-curated; edit only with explicit approval)
-- \`SECURITY.md\` and \`PRIVACY.md\` — Security and data handling rules (Phase 4)
+- `RULES.md` — Operating principles (human-curated; edit only with explicit approval)
+- `SECURITY.md` and `PRIVACY.md` — Security and data handling rules (Phase 4)
 
 ## Example: Initializing a Data Science Project
 
@@ -99,7 +100,7 @@ For a more complete setup, continue with Phases 4-6:
 **Phase 4** (2 hours):
 - Set up development environment (Python, GPU drivers, DuckDB)
 - CI/CD: Add automated model validation before merge
-- Document: "How to Run a Training Job" as a skill in \`ai/skills/\`
+- Document: "How to Run a Training Job" as a skill in `ai/skills/`
 
 **Phase 5** (20 min):
 - First task: "Build a churn prediction model"
@@ -116,27 +117,25 @@ For a more complete setup, continue with Phases 4-6:
 ## FAQ
 
 **Q: Do I really need all this before writing code?**
-→ At minimum, Phases 1-3 (90 min). They prevent thrashing. Phase 4 can happen alongside your first sprint.
+→ At minimum, Phases 1-2. Use Phase 3 only when reusable practices are an actual early decision. Phase 4 can happen alongside your first sprint.
 
 **Q: What if my team disagrees on the project's purpose?**
 → Stop before Phase 4. Clarify PROJECT.md. A misaligned team thrashes more than an under-prepared one.
 
 **Q: We already have some code/templates. Do we restart?**
-→ No. Jump to Phase 2. Use Phase 3 to catalog what you've already done and make decisions about what's reusable.
+→ No. Jump to Phase 2. Use Phase 3 only if you need to catalog what is reusable before work continues.
 
 **Q: Can we skip skills discovery?**
 → If your domain has no established practices (novel research), yes — skip Phase 3. If your domain is mature (web, ML, data), Phase 3 saves weeks of rework.
 
 **Q: How often do we revisit this?**
-→ Major pivots: re-run Phases 1 and 3. Quarterly: review SKILLS_REVIEW.md and move Phase 2 items to Phase 1 if priorities shift.
+→ Major pivots: re-run Phase 1 and revisit Phase 3 if reusable practices or tools need to change.
 
 ---
 
 ## Next Steps
 
-1. **Pick your path**: 90 minutes (Phases 1-3) or 5 hours (Phases 1-6)?
-2. **Open \`ai/workflows/initialize-project.md\`** and follow the instructions
-3. **Use \`ai/checklists/project-initialization.md\`** to track progress
-4. **When done**: Share PROJECT.md and SKILLS_REVIEW.md with your team for alignment
-
-Good luck! 🚀
+1. **Pick your path**: fast setup (Phases 1-2) or full setup (Phases 1-6)?
+2. **Open `ai/workflows/initialize-project.md`** and follow the instructions
+3. **Use `ai/checklists/project-initialization.md`** to track progress
+4. **When done**: Share PROJECT.md and any skills review notes with your team for alignment

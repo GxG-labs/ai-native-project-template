@@ -12,5 +12,4 @@ Suggested sections:
 - Glossary
 - Durable assumptions
 
-For brand and tone of voice → `context/brand/`.
 For external sources and working notes → `context/sources/`.

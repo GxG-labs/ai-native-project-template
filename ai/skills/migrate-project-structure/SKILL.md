@@ -16,7 +16,6 @@ PROJECT.md          ← why the project exists
 
 intent/             ← what we are doing and why
 context/            ← what we know
-  brand/            ← who we are and how we communicate
   sources/          ← external materials and working notes
 ai/                 ← how AI assistants work here
   context.md        ← stable facts AI needs across tasks
@@ -52,17 +51,14 @@ Before moving anything, read:
 
 ### 2. Create the new folders
 
-Create these folders with their README files if they do not exist:
+Create only the folders needed for real content. Add a folder `README.md` only when a folder has more than one subfolder and the split needs explanation.
 
 ```
-intent/README.md
-context/README.md
-context/brand/README.md
-context/sources/README.md
-output/README.md
-output/drafts/README.md
-output/final/README.md
-ai/methods/README.md
+intent/
+context/sources/
+output/drafts/
+output/final/
+ai/methods/
 ```
 
 ### 3. Migrate content by role

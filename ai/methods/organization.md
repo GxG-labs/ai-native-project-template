@@ -7,7 +7,6 @@ Core rule: organize by the role a file plays, not by its file type or when it wa
 | Question | Folder |
 |---|---|
 | What are we trying to do? Brief, goal, campaign, task | `intent/` |
-| Who are we? Brand, author, tone of voice | `context/brand/` |
 | What do we know from the world? Sources, notes, findings | `context/sources/` |
 | How should AI work here? Instructions, playbooks, rules | `ai/methods/` |
 | Executable AI procedure for a repeatable task | `ai/skills/` |
@@ -25,6 +24,17 @@ Core rule: organize by the role a file plays, not by its file type or when it wa
 
 Create a folder only when a real file needs to go there. Do not create folders to match a reference structure.
 
+## Skill folder shape
+
+Before placing a skill, check whether its name describes one procedure or a broader capability:
+
+- One procedure -> `ai/skills/[skill-name]/SKILL.md`
+- Several related procedures -> `ai/skills/[family-name]/[skill-name]/SKILL.md`
+- Broad capability that coordinates nested procedures -> `ai/skills/[capability-name]/SKILL.md` plus nested skill folders
+- Fixed orchestration across skills/tools/human steps -> `ai/workflows/[workflow-name].md`
+
+Do not let a broad folder name contain only one narrower `SKILL.md` without making the narrower step explicit. The folder name and the `SKILL.md` job must be at the same abstraction level.
+
 ## README rule
 
-Add a `README.md` when a folder's purpose is not obvious or misuse is likely. Keep it short: what belongs, what does not.
+Add a folder `README.md` only when the folder has more than one subfolder and the split needs explanation. Do not add README files to empty folders or folders with a single obvious child.
