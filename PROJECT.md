@@ -1,50 +1,36 @@
-# Project Charter
+# Устав проекта
 
-This file defines why the project exists, what job it must perform, and what a good result means.
+## Зачем существует проект
 
-Keep it short. This is the first file humans and AI assistants should read when they need to understand the project.
+TODO: Коротко опишите проблему и причину существования проекта.
 
-Write this as an outcome contract, not as a project encyclopedia.
+## Главная работа
 
-Formula:
+Этот проект помогает {кому} делать {какую работу} с помощью {какого механизма},
+чтобы {какой результат}.
 
-> This project helps {target user} do {job} by {mechanism}, so that {outcome}.
+## Идеальный результат
 
-## Why This Exists
+TODO: Что должно стать простым, надёжным или почти автоматическим.
 
-TODO: Explain the reason this project should exist in one short paragraph.
+## Хороший результат сейчас
 
-## Main Job
+TODO: Реалистичный результат текущего этапа.
 
-TODO: Use the formula: This project helps {target user} do {job} by {mechanism}, so that {outcome}.
+## Критерии успеха
 
-## Ideal Final Result
+- TODO: Проверяемый критерий.
+- TODO: Проверяемый критерий.
+- TODO: Проверяемый критерий.
 
-TODO: Describe the ideal end state. What should become easy, reliable, or nearly automatic when the project works perfectly?
+## Не делаем
 
-## Good Result Now
+- TODO: Что остаётся вне границ.
 
-TODO: Define a realistic good result for the current stage of the project.
+## Предпочтения при решениях
 
-## Success Criteria
+- TODO: Предпочтение, защищающее результат.
 
-- TODO: Add an observable criterion.
-- TODO: Add an observable criterion.
-- TODO: Add an observable criterion.
+## Текущий фокус
 
-## Non-Goals
-
-- TODO: Add what this project should not become.
-- TODO: Add tempting work that is out of scope.
-
-## Decision Preferences
-
-When improving this project, prefer:
-
-- TODO: Add a preference that protects the desired outcome.
-- TODO: Add a preference that prevents scope drift.
-- TODO: Add a preference that improves maintainability.
-
-## Current Focus
-
-TODO: State what matters most right now.
+TODO: Самое важное сейчас.

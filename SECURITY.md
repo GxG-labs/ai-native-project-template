@@ -1,11 +1,9 @@
-# Security
+# Безопасность
 
-This project is private by default and GitHub-ready when intentionally prepared for publication.
-
-Security rules:
-
-- Do not commit secrets, API keys, tokens, passwords, private keys, or session files.
-- Use `.env.example` to document required environment variables.
-- Keep real environment files local and ignored by Git.
-- Treat local databases, raw exports, and client files as sensitive unless explicitly classified otherwise.
-- Before publishing, review `.gitignore`, `PRIVACY.md`, `output/`, `data/`, `context/sources/`, and `tmp/`.
+- Не коммитьте секреты, ключи, токены, пароли, приватные ключи и session-файлы.
+- Документируйте нужные переменные только в `.env.example`; реальные значения
+  держите локально и игнорируйте Git.
+- Считайте базы данных, экспорты и raw-материалы чувствительными, пока не
+  доказано обратное.
+- Перед публикацией проверьте `.gitignore`, `context/`, `data/`, `docs/`,
+  `output/` и `tmp/`.

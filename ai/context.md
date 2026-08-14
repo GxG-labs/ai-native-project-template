@@ -1,15 +1,9 @@
-# AI Context
+# Контекст проекта
 
-Stable facts that AI assistants should remember across all tasks in this project.
+Только устойчивые факты, которые нужны в большинстве задач.
 
-Keep it compact. Add only durable context, not temporary notes.
-
-Suggested sections:
-
-- Project purpose
-- Audience or users
-- Important constraints
-- Glossary
-- Durable assumptions
-
-For external sources and working notes → `context/sources/`.
+- Цель проекта: TODO
+- Пользователи: TODO
+- Ограничения: TODO
+- Глоссарий: TODO
+- Устойчивые допущения: TODO

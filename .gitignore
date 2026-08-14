@@ -1,4 +1,4 @@
-# Environment and secrets
+# Окружение и секреты
 .env
 .env.*
 !.env.example
@@ -7,25 +7,25 @@
 *.p12
 *.pfx
 
-# Local temporary files
+# Локальные временные файлы
 tmp/
 .DS_Store
 .lanes/
 
-# Workbench contents are local by default.
+# Содержимое workbench по умолчанию локальное.
 workbench/input/*
 !workbench/input/.gitkeep
 
-# Logs
+# Логи
 *.log
 logs/
 
-# Local databases
+# Локальные базы данных
 *.sqlite
 *.sqlite3
 *.db
 
-# Dependencies and caches
+# Зависимости и кэши
 node_modules/
 .venv/
 venv/
@@ -34,7 +34,7 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 
-# Build outputs
+# Результаты сборки
 dist/
 build/
 .next/

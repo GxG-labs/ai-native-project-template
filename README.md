@@ -1,68 +1,15 @@
-# AI-Native Project Template
+# Шаблон AI-проекта
 
-This repository is a template for AI-assisted projects: software, agents, research pipelines, marketing systems, personal assistants, document automation, presentations, and other deliverables.
+Минимальная структура для software, контента, исследований и операционных
+систем. Начните с `RULES.md`, затем заполните `PROJECT.md` и `ai/context.md`.
 
-It is designed for projects that may involve code, documents, datasets, research, presentations, generated artifacts, and reusable AI instructions.
+## Первые шаги
 
-## Start Here
+1. Опишите результат и границы в `PROJECT.md`.
+2. Создайте первую задачу в `intent/` по `templates/task.md`.
+3. Если задача основана на пополняемом знании, следуйте
+   `ai/workflows/compile-knowledge.md`.
+4. Если она улучшает систему итерациями, следуйте
+   `ai/workflows/gauntlet-loop.md`.
 
-- `RULES.md` is the first file AI assistants must read. It points to the rest of the shared operating layer.
-- `PROJECT.md` explains why this project exists, its main job, and what a good result means.
-- `templates/project-charter.md` provides a reusable outcome-first charter format.
-- `PROJECT_STRUCTURE.md` explains the project organization model.
-- `ai/README.md` explains the shared AI operating system.
-- `ai/context.md` stores stable project context.
-- `ai/methods/organization.md` gives short file placement rules.
-- `intent/` stores project intent and task requests.
-- `workbench/input/` is the default place to drop files for the current task.
-
-The template uses lazy folder creation. New projects start small. Additional folders are created only when real work requires them.
-
-## How To Start A New Project
-
-1. Rename the project and update this `README.md`.
-2. Fill in `PROJECT.md` using the outcome-first format in `templates/project-charter.md`.
-3. Fill in `ai/context.md` with durable facts: audience, constraints, glossary, and assumptions.
-4. Create a brief in `intent/` that captures the first real goal.
-5. Drop current task files into `workbench/input/` if no better location exists yet.
-6. Ask the assistant to work from `PROJECT.md`, the brief, and `workbench/input/`.
-7. Review drafts in `output/drafts/` if the task produces intermediate results.
-8. Promote durable results into the right long-term location.
-
-## Default File Flow
-
-```text
-intent/             -> meaning input: what is being asked and why
-workbench/input/    -> file input: temporary files for the current task
-context/sources/    -> external sources, notes, and findings
-ai/methods/         -> reusable domain methods
-ai/skills/          -> repeatable AI procedures
-output/drafts/      -> intermediate generated results
-output/final/       -> accepted final deliverables
-data/               -> structured datasets
-src/                -> implementation code
-```
-
-## Growth Rule
-
-Do not create the full folder tree upfront.
-
-Create a folder only when:
-
-- a real file needs that location;
-- the folder represents a clear lifecycle or module boundary;
-- a workflow or tool requires it.
-
-Use `PROJECT_STRUCTURE.md` as the full reference catalog.
-
-## AI Assistants
-
-All AI assistants should use the same project operating layer:
-
-```text
-ai/
-```
-
-The root files `AGENTS.md`, `CLAUDE.md`, and `GEMINI.md` are thin adapters. They point different assistant systems to the same shared instructions.
-
-Assistants read `RULES.md` first, then follow the read order defined there.
+Полная карта и правила роста находятся в `PROJECT_STRUCTURE.md`.
