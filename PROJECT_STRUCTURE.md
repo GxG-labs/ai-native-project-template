@@ -18,6 +18,19 @@ ai/
   workflows/             ← последовательности шагов и циклы
   checklists/            ← (по необходимости) критерии проверки
 
+tenants/                 ← (по необходимости) tenant-specific материалы
+  <tenant>/
+    raw/                  ← сырые материалы
+    curated/              ← вручную подготовленные канонические материалы
+    config/               ← готовый runtime-пакет tenant для новых запусков
+
+runs/                    ← (по необходимости) execution history
+  <tenant>/<run-id>/
+    config/               ← неизменяемая копия tenant config
+    input/                ← вход конкретного запуска
+    output/               ← результаты
+    logs/                 ← технические записи
+
 output/
   drafts/                ← промежуточная работа
   final/                 ← принятые результаты
