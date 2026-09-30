@@ -14,7 +14,8 @@
 
    - компиляция знаний — `ai/methods/knowledge-compilation.md` и
      `ai/workflows/compile-knowledge.md`;
-   - Gauntlet Loop — `ai/workflows/gauntlet-loop.md` и записи нужного
+   - Gauntlet Loop — `ai/workflows/gauntlet-loop.md`, целевое дерево
+     `docs/spec/<scope>/` и записи нужного
      `docs/gauntlet/<scope>/`;
    - повторяемая процедура — её `ai/skills/.../SKILL.md`;
    - многошаговый процесс — нужный файл из `ai/workflows/`;
