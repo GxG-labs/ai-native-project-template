@@ -22,6 +22,8 @@ logs/
 
 # Локальные базы данных
 *.sqlite
+*.sqlite-wal
+*.sqlite-shm
 *.sqlite3
 *.db
 
@@ -37,5 +39,7 @@ __pycache__/
 # Результаты сборки
 dist/
 build/
+!templates/self-improving-loop/skills/build/
+!runs/*/*/skills/build/
 .next/
 out/

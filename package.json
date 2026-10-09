@@ -1,0 +1,22 @@
+{
+  "name": "local-research-loop",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.16"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && node --test dist/tests/*.test.js",
+    "loop": "node dist/src/loop/cli.js",
+    "cycle": "node dist/src/cycle/cli.js"
+  },
+  "dependencies": {
+    "ajv": "8.18.0",
+    "cheerio": "1.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.0",
+    "typescript": "5.9.3"
+  }
+}

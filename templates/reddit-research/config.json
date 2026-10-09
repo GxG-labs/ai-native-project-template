@@ -1,0 +1,9 @@
+{
+  "from": "2026-06-05",
+  "through": "2026-10-05",
+  "queries": 3,
+  "postsPerQuery": 4,
+  "maxCalls": 120,
+  "timeoutSeconds": 180,
+  "noProgress": 2
+}

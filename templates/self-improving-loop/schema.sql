@@ -1,0 +1,92 @@
+-- Base schema for a fresh run. Process history stays in this same database.
+CREATE TABLE IF NOT EXISTS kv (
+  key TEXT PRIMARY KEY,
+  value TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS steps (
+  id INTEGER PRIMARY KEY,
+  phase TEXT NOT NULL,
+  iteration INTEGER NOT NULL,
+  input TEXT NOT NULL,
+  output TEXT NOT NULL,
+  decision TEXT NOT NULL,
+  reason TEXT NOT NULL,
+  next_state TEXT NOT NULL,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS attempts (
+  id INTEGER PRIMARY KEY,
+  phase TEXT NOT NULL,
+  input TEXT NOT NULL,
+  output TEXT,
+  error TEXT,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS results (
+  id TEXT PRIMARY KEY,
+  item TEXT NOT NULL,
+  accepted INTEGER,
+  revision INTEGER NOT NULL DEFAULT 0,
+  human INTEGER NOT NULL DEFAULT 0,
+  reason TEXT NOT NULL DEFAULT '',
+  method INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS ratings (
+  id INTEGER PRIMARY KEY,
+  result_id TEXT NOT NULL,
+  accepted INTEGER NOT NULL,
+  revision INTEGER NOT NULL,
+  source TEXT NOT NULL,
+  reason TEXT NOT NULL,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS actions (
+  key TEXT PRIMARY KEY,
+  item_id TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS feedback (
+  id INTEGER PRIMARY KEY,
+  content TEXT NOT NULL,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS criteria_versions (
+  id INTEGER PRIMARY KEY,
+  text TEXT NOT NULL,
+  reason TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS methods (
+  id INTEGER PRIMARY KEY,
+  instruction TEXT NOT NULL,
+  parent INTEGER,
+  status TEXT NOT NULL,
+  reason TEXT NOT NULL,
+  passes INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS observations (
+  id INTEGER PRIMARY KEY,
+  result_id TEXT NOT NULL,
+  method INTEGER NOT NULL,
+  revision INTEGER NOT NULL,
+  content TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS lock (
+  id INTEGER PRIMARY KEY,
+  pid INTEGER NOT NULL
+);
+
+CREATE TRIGGER IF NOT EXISTS retain_results BEFORE DELETE ON results BEGIN SELECT RAISE(ABORT,'Results are retained'); END;
+CREATE TABLE IF NOT EXISTS migrations (
+  name TEXT PRIMARY KEY,
+  checksum TEXT NOT NULL,
+  applied_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

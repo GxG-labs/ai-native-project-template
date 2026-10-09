@@ -46,3 +46,11 @@ intent/<change>/intent.md
 
 Полная карта, границы ролей и правила роста находятся в
 [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md).
+
+## Standalone Reddit research
+
+The [TypeScript research template](templates/reddit-research/README.md) runs local search, assessment, method experiments and SQLite history without an open chat. See its README for setup, recovery and human feedback.
+
+## Universal autonomous loop
+
+The [executable universal template](templates/self-improving-loop/README.md) uses a task-specific adapter and SQLite checkpoints. Run `npm run cycle -- init --run runs/local/example --demo`, then `npm run cycle -- run --run runs/local/example`. The Reddit runtime above is a separate domain implementation.

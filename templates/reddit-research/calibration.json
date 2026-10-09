@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cal_builder",
+    "url": "https://www.reddit.com/r/test/comments/cal1/",
+    "subreddit": "test",
+    "title": "Similar product builder",
+    "published": "2026-09-01",
+    "body": "I am building a tool that calculates safe spending after bills and lets couples coordinate their account contributions. Looking for feedback from people managing household money.",
+    "comments": [],
+    "evidence": "Synthetic calibration fixture derived from explicit human rule; not a finding",
+    "verified": true,
+    "expected": 5
+  },
+  {
+    "id": "cal_freeze",
+    "url": "https://www.reddit.com/r/test/comments/cal2/",
+    "subreddit": "test",
+    "title": "Account freeze only",
+    "published": "2026-09-01",
+    "body": "Will this service freeze my account if I receive a payout? I only want to know whether the platform will block me.",
+    "comments": [],
+    "evidence": "Synthetic calibration fixture derived from explicit human exclusion; not a finding",
+    "verified": true,
+    "expected": 2
+  },
+  {
+    "id": "cal_receipt",
+    "url": "https://www.reddit.com/r/test/comments/cal3/",
+    "subreddit": "test",
+    "title": "Payment details only",
+    "published": "2026-09-01",
+    "body": "My employer asked for my bank details. Which account number should I give them to receive salary? I am not asking about budgeting or moving funds between my accounts.",
+    "comments": [],
+    "evidence": "Synthetic calibration fixture derived from explicit human exclusion; not a finding",
+    "verified": true,
+    "expected": 2
+  },
+  {
+    "id": "cal_reserve",
+    "url": "https://www.reddit.com/r/test/comments/cal4/",
+    "subreddit": "test",
+    "title": "Safe owner pay",
+    "published": "2026-09-01",
+    "body": "Every month I reserve taxes and upcoming business bills in separate accounts. My spreadsheet failed to account for an annual renewal and I paid myself too much. I need to calculate how much I can safely transfer to personal spending while keeping the business funded.",
+    "comments": [],
+    "evidence": "Synthetic calibration fixture of the product problem; not a finding",
+    "verified": true,
+    "expected": 5
+  },
+  {
+    "id": "cal_refusal",
+    "url": "https://www.reddit.com/r/test/comments/cal5/",
+    "subreddit": "test",
+    "title": "Known bill, refusal to pay",
+    "published": "2026-09-01",
+    "body": "My former flatmates know exactly how much they owe for our final shared bill, but refuse to pay. I need to make them repay the debt; calculating contributions is not the problem.",
+    "comments": [],
+    "evidence": "Synthetic control for the human correction: refusal versus financial coordination; not a finding",
+    "verified": true,
+    "expected": 2
+  }
+]
