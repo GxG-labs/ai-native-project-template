@@ -168,4 +168,4 @@ Run-local migrations do not affect the template or other runs. Template changes 
 
 `npm test` includes fresh-process tests for every phase, persisted response reuse after an injected transaction failure, adaptive duplicate-plan recovery, transient tool errors, exhausted retry budgets, human corrections both between phases and during a live child call, current planner ratings, result retention and method rollback after three complete passes. The offline example can run without credentials. A real model run is a separate integration check and requires local CLI access.
 
-Implementation: `src/cycle/`. Existing `src/loop/` and `templates/reddit-research/` are a separate legacy domain implementation; this update does not silently migrate or restart its runs.
+Implementation: `src/cycle/`. The Reddit-specific implementation in `src/loop/` and `templates/reddit-research/` is independent; initializing this template does not migrate or restart its runs.

@@ -1,24 +1,10 @@
-# Plan
+# Implementation plans
 
-Индекс планов нетривиальных и рискованных изменений.
+Navigation for nontrivial or risky changes. Start with a change's `plan.md`; follow its links to module details only when needed.
 
-## Структура
+| Change | Entry point |
+| --- | --- |
+| Autonomous loop | [autonomous-loop/plan.md](autonomous-loop/plan.md) |
+| Reddit research loop | [research-loop/plan.md](research-loop/plan.md) |
 
-```text
-docs/plan/<change>/
-├── plan.md        ← вход, порядок работы и карта
-└── <module>/      ← детали изменения модуля, когда они нужны
-```
-
-Начинайте с `plan.md`, затем открывайте только указанные в его карте
-модульные материалы. Новый change создавайте по
-[templates/plan.md](../../templates/plan.md).
-
-## Границы
-
-Здесь хранится путь к принятому [spec](../spec/README.md) и только те текущие
-наблюдения, которые нужны этому изменению. Полное описание текущей реализации
-не ведётся: её источники правды — код, конфигурация, тесты и история git.
-
-Владельцы правил: [PROJECT_STRUCTURE.md](../../PROJECT_STRUCTURE.md) и
-[software-change.md](../../ai/workflows/software-change.md).
+New plans use [templates/plan.md](../../templates/plan.md). A plan links to its accepted [specification](../spec/README.md) and records the steps and checks for that change. Code, configuration, tests, and Git history remain the evidence of current implementation. File placement is owned by [PROJECT_STRUCTURE.md](../../PROJECT_STRUCTURE.md), and software change steps by [software-change.md](../../ai/workflows/software-change.md).

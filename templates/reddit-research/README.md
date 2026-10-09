@@ -14,11 +14,11 @@ npm run loop -- init --run runs/local/my-research --from 2026-06-05 --through 20
 npm run loop -- run --run runs/local/my-research --iterations 3
 ```
 
-The dates are inclusive original publication dates. Choose the last four calendar months for a new task; a run freezes its window to make results reproducible. The checked-in dates belong to the October 5, 2026 research task.
+The dates are inclusive original publication dates. Choose the window required by your task; initialization freezes it for reproducibility. The checked-in dates are an example from the October 5, 2026 research task, so override them for a new task.
 
 `init` creates a run database containing copies of this template's config, criteria, initial method and calibration examples. Edit those template files before initialization, or copy this template directory and pass `--template PATH`. Subsequent template edits do not alter existing runs. Define the task and rating criteria in `criteria.txt`; `method.txt` supplies starting search ideas. `config.json` sets the date window, queries per iteration, posts per query, call budget, call timeout and consecutive empty-batch limit. There are no required placeholders.
 
-To continue the existing project run:
+To continue an existing local run, if you have one:
 
 ```sh
 npm run loop -- run --run runs/local/reddit-jtbd --iterations 3
@@ -48,9 +48,9 @@ Search changes never modify scoring instructions or user criteria and never run 
 
 Each model call starts fresh with bounded, step-specific context. It cannot edit the database or code. Criteria, source validation, retention and checkpoint rules are enforced outside the model. A model's evidence-based judgment is still fallible; keep/revert decisions are inspectable, not causal proof.
 
-## Relevance for this task
+## Bundled example criteria
 
-Find people with roughly similar problems reserving for obligations, calculating a safe remainder and coordinating money across sources. Explore irregular and stablecoin income, cross-border households, shared housing costs, family finances and debts. Multiple currencies/accounts, recurring coordination and costly mistakes are clues, not mandatory requirements.
+The bundled `criteria.txt` targets people with roughly similar problems reserving for obligations, calculating a safe remainder and coordinating money across sources. Replace it when initializing a different research task. For this example, explore irregular and stablecoin income, cross-border households, shared housing costs, family finances and debts. Multiple currencies/accounts, recurring coordination and costly mistakes are clues, not mandatory requirements.
 
 - **5:** a strong financial coordination problem, or an author building a similar product. Developer threads are audience leads; comments require separate evidence.
 - **4:** a clear similar difficulty with some missing details; explain the concrete calculation, reserve or funding-coordination action that could help.

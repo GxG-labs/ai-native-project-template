@@ -1,56 +1,29 @@
-# Шаблон AI-проекта
+# AI project template
 
-Минимальная структура для software, контента, исследований и операционных
-систем. Начните с [RULES.md](RULES.md), затем заполните
-[PROJECT.md](PROJECT.md) и [ai/context.md](ai/context.md).
+A starting structure for software, research, content, and operational work. Read [RULES.md](RULES.md) first; it is the entry point for agent behavior. [PROJECT.md](PROJECT.md) and [ai/context.md](ai/context.md) are still placeholders for this project's purpose and stable facts.
 
-## Первые шаги
+## Start here
 
-1. Опишите результат и границы в [PROJECT.md](PROJECT.md).
-2. Создайте первую задачу в `intent/` по
-   [templates/intent.md](templates/intent.md).
-3. Для изменения ПО используйте
-   [software-change.md](ai/workflows/software-change.md).
-4. Если задача основана на пополняемом знании, следуйте
-   [compile-knowledge.md](ai/workflows/compile-knowledge.md).
-5. Если она улучшает систему итерациями, следуйте
-   [gauntlet-loop.md](ai/workflows/gauntlet-loop.md).
+1. Define the outcome and boundaries in [PROJECT.md](PROJECT.md).
+2. Create the first task in `intent/` using [templates/intent.md](templates/intent.md).
+3. Follow [software-change.md](ai/workflows/software-change.md) for software work, [compile-knowledge.md](ai/workflows/compile-knowledge.md) for growing knowledge, or [gauntlet-loop.md](ai/workflows/gauntlet-loop.md) for iterative system improvement.
 
-## Жизненный цикл изменения ПО
+[PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) owns file placement and the rules for adding folders and README files. The directories below are navigation, not a second set of rules.
 
-```text
-intent/<change>/intent.md
-  → docs/spec/<scope>/spec.md
-  → docs/plan/<change>/plan.md
-  → код + тесты + diff
-```
-
-`spec` и `plan` — деревья: входной файл даёт карту, а подробности по модулям
-при необходимости размещаются в подпапках.
-
-## Индекс
-
-| Что искать | Владелец или вход |
+| Need | Entry point |
 | --- | --- |
-| Правила работы | [RULES.md](RULES.md) |
-| Цель и границы проекта | [PROJECT.md](PROJECT.md) |
-| Полная карта файлов | [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) |
-| Устойчивый контекст | [ai/context.md](ai/context.md) |
-| Намерения и задачи | [intent/](intent/) |
-| Требования и целевая архитектура | [docs/spec/](docs/spec/README.md) |
-| Планы реализации | [docs/plan/](docs/plan/README.md) |
-| Методы | [ai/methods/](ai/methods/) |
-| Исполнимые процедуры | [ai/skills/](ai/skills/) |
-| Многошаговые процессы | [ai/workflows/](ai/workflows/) |
-| Шаблоны артефактов | [templates/](templates/) |
+| Project purpose | [PROJECT.md](PROJECT.md) |
+| Stable project facts | [ai/context.md](ai/context.md) |
+| Requirements and target architecture | [docs/spec/](docs/spec/README.md) |
+| Implementation plans | [docs/plan/](docs/plan/README.md) |
+| Methods, skills, workflows | [ai/](ai/) |
+| Reusable artifact templates | [templates/](templates/) |
 
-Полная карта, границы ролей и правила роста находятся в
-[PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md).
+## Executable examples
 
-## Standalone Reddit research
+This repository also contains two independent local TypeScript loops. They require Node.js 22.16 or newer; run `npm ci` and `npm run build` from the repository root.
 
-The [TypeScript research template](templates/reddit-research/README.md) runs local search, assessment, method experiments and SQLite history without an open chat. See its README for setup, recovery and human feedback.
+- [Autonomous loop](templates/self-improving-loop/README.md): a generic `cycle` CLI with a task-specific adapter, SQLite checkpoints, and an offline demo. Start with `npm run cycle -- init --run runs/local/example --demo`.
+- [Reddit research loop](templates/reddit-research/README.md): a domain-specific `loop` CLI using public Reddit RSS and a locally authenticated Codex CLI. Its template README covers setup, execution, and recovery.
 
-## Universal autonomous loop
-
-The [executable universal template](templates/self-improving-loop/README.md) uses a task-specific adapter and SQLite checkpoints. Run `npm run cycle -- init --run runs/local/example --demo`, then `npm run cycle -- run --run runs/local/example`. The Reddit runtime above is a separate domain implementation.
+`npm test` builds and runs the Node test suite for both loops. If present, `runs/local/` contains individual run records; their databases and captured evidence are not reusable templates.
