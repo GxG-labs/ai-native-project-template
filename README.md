@@ -21,9 +21,8 @@ A starting structure for software, research, content, and operational work. Read
 
 ## Executable examples
 
-This repository also contains two independent local TypeScript loops. They require Node.js 22.16 or newer; run `npm ci` and `npm run build` from the repository root.
+This repository contains a local TypeScript loop template. It requires Node.js 22.16 or newer; run `npm ci` and `npm run build` from the repository root.
 
 - [Autonomous loop](templates/self-improving-loop/README.md): a generic `cycle` CLI with a task-specific adapter, SQLite checkpoints, and an offline demo. Start with `npm run cycle -- init --run runs/local/example --demo`.
-- [Reddit research loop](templates/reddit-research/README.md): a domain-specific `loop` CLI using public Reddit RSS and a locally authenticated Codex CLI. Its template README covers setup, execution, and recovery.
 
-`npm test` builds and runs the Node test suite for both loops. If present, `runs/local/` contains individual run records; their databases and captured evidence are not reusable templates.
+`npm test` builds and runs the Node test suite. If present, `runs/local/` contains individual run records; their databases and captured evidence are not reusable templates.

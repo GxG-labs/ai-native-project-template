@@ -23,15 +23,15 @@ Read the universal context in this order:
 
 1. `PROJECT.md` — why the project exists
 2. `ai/context.md` — stable facts about the project
-3. `ai/methods/organization.md` — where files belong
+3. `ai/playbooks/organization.md` — where files belong
 4. `PROJECT_STRUCTURE.md` — folder map
 
 Then classify the task before editing and load the smallest owner source set:
 
 - **Project organization or file placement:** read
-  `ai/methods/organization.md` and `PROJECT_STRUCTURE.md`.
-- **Task-type behavior:** read the relevant file in `ai/methods/`.
-- **Knowledge compilation:** read `ai/methods/knowledge-compilation.md` and
+  `ai/playbooks/organization.md` and `PROJECT_STRUCTURE.md`.
+- **Task-type behavior:** read the relevant file in `ai/playbooks/`.
+- **Knowledge compilation:** read `ai/playbooks/knowledge-compilation.md` and
   `ai/workflows/compile-knowledge.md`.
 - **Gauntlet Loop:** read `ai/workflows/gauntlet-loop.md`, the target
   `docs/spec/<scope>/` tree, and the relevant `docs/gauntlet/<scope>/` records.
@@ -56,7 +56,7 @@ owned by a method, skill, checklist, or project rule.
    If the goal is ambiguous and the next action would be risky, ask one focused question before proceeding.
 
 2. **Put files where they belong, use conventional names.**
-   Follow `ai/methods/organization.md`. If the industry has a recognized name for a responsibility, use it.
+   Follow `ai/playbooks/organization.md`. If the industry has a recognized name for a responsibility, use it.
 
 3. **Keep rules in one place.**
    `RULES.md` at the project root is the single source of truth for agent behavior. All tool-specific files (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursor/rules/*.mdc`, etc.) are adapters: they must contain only a pointer to this file. Hidden folders (`.claude/`, `.cursor/`, etc.) must never contain substantive guides, documentation, or AI instructions — only routing config.
@@ -119,7 +119,7 @@ checklists, or architecture:
 - Confirm that the changed behavior lives in the owner layer.
 - Check that adapter layers still route to the owner instead of duplicating it.
 - Search related layers for stale copies or contradictory instructions.
-- If you changed a workflow, check referenced skills, methods, checklists,
+- If you changed a workflow, check referenced skills, playbooks, checklists,
   artifact paths, and downstream adapters.
 - If you changed a skill, check every workflow, prompt, or checklist that
   references it.

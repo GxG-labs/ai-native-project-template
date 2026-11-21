@@ -5,7 +5,7 @@ description: Привести проект к локальным правила�
 
 # Выравнивание проекта
 
-Следуйте `ai/methods/align-project-rules.md`. Эта процедура исполняет локальный
+Следуйте `ai/playbooks/align-project-rules.md`. Эта процедура исполняет локальный
 стандарт, но не заменяет его.
 
 ## Подготовка
@@ -13,7 +13,7 @@ description: Привести проект к локальным правила�
 1. Прочитайте entry point репозитория и полностью прочитайте `RULES.md`, если
    он назван владельцем правил.
 2. Выполните обязательную последовательность чтения из `RULES.md`; в этом
-   формате это `PROJECT.md`, `ai/context.md`, `ai/methods/organization.md` и
+   формате это `PROJECT.md`, `ai/context.md`, `ai/playbooks/organization.md` и
    `PROJECT_STRUCTURE.md`.
 3. Загрузите только владельцев, относящихся к задаче: skill, workflow,
    checklist, метод, записи Gauntlet. Если работа касается чувствительных
