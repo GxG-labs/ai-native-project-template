@@ -40,6 +40,24 @@ threads and to moving goalposts, not to writing code.
   per playbook §5.
 - **Merging.** Merging to `main` is done only by the owner.
 
+## Plans shown to the owner: What | Why | Why it's needed
+
+Every plan you show the owner uses this short format: the overall plan at intake, each wave, each
+milestone's cycle plan, and every intermediate step you announce. One bullet per step, three parts,
+one short line each, in the owner's language (for a Russian-speaking owner: **Что | Зачем | Почему**):
+
+- **What**: the concrete action you are about to take.
+- **Why (goal)**: what it achieves, and for which goal or AC.
+- **Why it's needed**: why it cannot be skipped. Name what breaks, or which AC or gate fails, without it.
+
+Example:
+- **What:** add pytest-timeout to check-all | **Why:** a hanging test turns the gate red after 5 min, not
+  after 4 h | **Why it's needed:** without it the milestone owner hangs silently and the milestone stalls.
+
+If you cannot fill in "Why it's needed" for a step, drop the step. Milestone owners use the same format
+in their cycle plans (`docs/plan/<change>/<id>-cycle-<n>.md`) and in their status lines to the
+orchestrator.
+
 ## 1. Intake: artifacts the owner approves, once
 
 1. `intent/<change>/intent.md`. Write the problem and the acceptance criteria in plain words, with
@@ -56,7 +74,8 @@ threads and to moving goalposts, not to writing code.
      Prefer standard tools over home-made ones.
 4. **All owner decisions up front.** List every open question the plan touches. Ask them in one batch,
    each with a recommended default.
-5. Create `reports/progress.md` (format in §5) and commit it. The **owner approves the plan**. Then start.
+5. Create `reports/progress.md` (format in §5) and commit it. Show the plan in the What | Why | Why it's
+   needed format, and the **owner approves it**. Then start.
 
 From here on, the rules, thresholds, DoD and rubric are **frozen**. Changes apply from the next cycle
 (rule F3).
