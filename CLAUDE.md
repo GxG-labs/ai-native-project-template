@@ -1,4 +1,6 @@
-# Инструкции для агентов
+# Agent instructions
 
-Сначала полностью прочитайте `RULES.md`. Это единственный источник правил
-работы в проекте.
+`RULES.md` is the single source of truth for working in this project. It is
+imported below so it loads into every session.
+
+@RULES.md

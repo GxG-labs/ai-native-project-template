@@ -13,7 +13,7 @@ context/
 
 ai/
   context.md             ← устойчивые факты о проекте
-  methods/               ← playbook и способы подхода к работе
+  playbooks/             ← playbook и способы подхода к работе
   skills/                ← повторяемые исполнимые процедуры
   workflows/             ← последовательности шагов и циклы
   checklists/            ← (по необходимости) критерии проверки
@@ -88,7 +88,7 @@ intent/<change>/intent.md → docs/spec/<scope>/spec.md → docs/plan/<change>/p
 ### Компиляция знаний
 
 ```text
-context/sources/<topic>/ → ai/methods/<topic>.md → ai/skills/<topic>/SKILL.md
+context/sources/<topic>/ → ai/playbooks/<topic>.md → ai/skills/<topic>/SKILL.md
 raw material                 playbook                skill
 ```
 
