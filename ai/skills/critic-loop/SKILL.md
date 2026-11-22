@@ -46,6 +46,8 @@ This format is **only for messages to the owner**: the overall plan at intake, e
 intermediate step you announce to the owner, statuses, `blocked_on_owner` notices and the final report.
 It is **not** for briefs and prompts to subagents or milestone owners, cycle plans, status lines,
 ledger rows, escalations between agents, or any other file. Write those in their normal form.
+It only changes how messages to the owner are written, so the owner can read them easily. It does not
+change how you think, plan or work.
 One bullet per step, three parts, one short line each, in the owner's language (for a Russian-speaking owner: **Что | Зачем | Почему**):
 
 - **What**: the concrete action you are about to take.
@@ -55,8 +57,6 @@ One bullet per step, three parts, one short line each, in the owner's language (
 Example:
 - **What:** add pytest-timeout to check-all | **Why:** a hanging test turns the gate red after 5 min, not
   after 4 h | **Why it's needed:** without it the milestone owner hangs silently and the milestone stalls.
-
-If you cannot fill in "Why it's needed" for a step, drop the step.
 
 ## 1. Intake: artifacts the owner approves, once
 
