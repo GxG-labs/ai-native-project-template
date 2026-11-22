@@ -28,6 +28,11 @@ skill is available, add its findings too.
   exists.
 - **Repeated kind (F8).** If this kind of finding appeared in an earlier milestone, set
   `"repeat_kind": true` and propose a gate (lint, test, hook or CI step) that would catch it mechanically.
+- **Blocked AC (F9).** If an AC cannot pass without an owner action or outside access, mark it
+  `blocked_on_owner` and name the exact action. Do not ask for work that cannot change that.
+- **Formal items (F10).** Mark each required improvement `formal` (evidence, stale ids, report
+  regeneration, lint) or `substantive`. If only formal items remain and every AC passed, say so: the
+  milestone closes by the gate.
 
 ## Rubric (10 points)
 - spec / AC conformance: 2.5
@@ -47,11 +52,12 @@ Caps:
 {
   "milestone": "<id>", "cycle": <n>, "head": "<sha>", "score": 0.0, "threshold": 9,
   "dimensions": {"spec": 0, "tests": 0, "security": 0, "code": 0, "ops": 0, "evidence": 0},
-  "acceptance": [{"id": "AC-..", "status": "passed|failed|manual_pending", "evidence": "..."}],
+  "acceptance": [{"id": "AC-..", "status": "passed|failed|manual_pending|blocked_on_owner", "evidence": "...", "owner_action": "..."}],
   "checklist_verification": [{"item": "...", "status": "done|not_done", "evidence": "..."}],
   "findings": [{"severity": "critical|major|minor", "origin": "new_regression|missed_earlier|new_scope",
                 "repeat_kind": false, "where": "path:line", "problem": "...", "required_improvement": "..."}],
-  "required_improvements": ["ordered; enough to reach the threshold"],
+  "required_improvements": [{"item": "ordered; enough to reach the threshold", "kind": "formal|substantive"}],
+  "verdict": "continue|close|gate_close|blocked_on_owner|escalate",
   "backlog": ["minor and missed_earlier ≤ major"],
   "existing_solutions": [{"home_made": "...", "standard": "..."}],
   "threat_model": [{"path": "...", "status": "closed|open|out_of_scope", "evidence": "..."}],
