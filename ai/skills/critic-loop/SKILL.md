@@ -40,11 +40,13 @@ threads and to moving goalposts, not to writing code.
   per playbook §5.
 - **Merging.** Merging to `main` is done only by the owner.
 
-## Plans shown to the owner: What | Why | Why it's needed
+## Reports to the owner: What | Why | Why it's needed
 
-Every plan you show the owner uses this short format: the overall plan at intake, each wave, each
-milestone's cycle plan, and every intermediate step you announce. One bullet per step, three parts,
-one short line each, in the owner's language (for a Russian-speaking owner: **Что | Зачем | Почему**):
+This format is **only for messages to the owner**: the overall plan at intake, each wave, every
+intermediate step you announce to the owner, statuses, `blocked_on_owner` notices and the final report.
+It is **not** for briefs and prompts to subagents or milestone owners, cycle plans, status lines,
+ledger rows, escalations between agents, or any other file. Write those in their normal form.
+One bullet per step, three parts, one short line each, in the owner's language (for a Russian-speaking owner: **Что | Зачем | Почему**):
 
 - **What**: the concrete action you are about to take.
 - **Why (goal)**: what it achieves, and for which goal or AC.
@@ -54,10 +56,7 @@ Example:
 - **What:** add pytest-timeout to check-all | **Why:** a hanging test turns the gate red after 5 min, not
   after 4 h | **Why it's needed:** without it the milestone owner hangs silently and the milestone stalls.
 
-If you cannot fill in "Why it's needed" for a step, drop the step. Milestone owners use the same format
-in their cycle plans (`docs/plan/<change>/<id>-cycle-<n>.md`) and in their status lines to the
-orchestrator. The same format applies to every status, escalation, `blocked_on_owner` notice and
-final report that reaches the owner.
+If you cannot fill in "Why it's needed" for a step, drop the step.
 
 ## 1. Intake: artifacts the owner approves, once
 
@@ -141,15 +140,16 @@ loop:
    merge.**
 
 **BLOCKED_ON_OWNER**: stop the cycles at once. Record the milestone as `blocked_on_owner` in the ledger, put
-the exact owner action under "Waiting for owner", and report it in the What | Why | Why it's needed
-format. The milestone resumes with a new cycle only when the owner has acted. Milestones that do not
+the exact owner action under "Waiting for owner", and report it to the owner in the What | Why | Why
+it's needed format. The milestone resumes with a new cycle only when the owner has acted. Milestones that do not
 depend on it keep running.
 
 **GATE_CLOSE**: the milestone owner fixes the formal items, runs the check command until it is green,
 commits, and reports. The orchestrator re-runs the check and the AC commands itself and closes the
 milestone. No new critic cycle.
 
-**ESCALATE** to the orchestrator in the What | Why | Why it's needed format, with:
+**ESCALATE** to the orchestrator (the orchestrator reports it to the owner in the What | Why | Why
+it's needed format), with:
 - the last score;
 - the open findings with their `origin`;
 - one concrete choice for the owner: accept them as a known risk (recorded in the report), narrow the AC,
@@ -205,7 +205,7 @@ milestone. No new critic cycle.
   mutation testing limited to the modules the milestone changed. A hang beyond the limit turns the gate
   red. It never means waiting.
 - **F12 Heartbeat.** A milestone owner commits, or writes a status line to its branch, at least every 30
-  minutes, in the What | Why | Why it's needed format. After 60 minutes of silence the orchestrator
+  minutes. After 60 minutes of silence the orchestrator
   checks it. If it is stuck, the orchestrator restarts it from the last commit with a narrow brief and
   adds a ledger row.
 
