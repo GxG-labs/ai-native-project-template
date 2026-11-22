@@ -17,6 +17,7 @@ A starting structure for software, research, content, and operational work. Read
 | Requirements and target architecture | [docs/spec/](docs/spec/README.md) |
 | Implementation plans | [docs/plan/](docs/plan/README.md) |
 | Methods, skills, workflows | [ai/](ai/) |
+| Multi-milestone delivery with an executor and an independent critic | [critic-loop skill](ai/skills/critic-loop/SKILL.md) |
 | Reusable artifact templates | [templates/](templates/) |
 
 ## Executable examples
