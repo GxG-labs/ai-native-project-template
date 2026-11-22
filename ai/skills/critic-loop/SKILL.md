@@ -40,11 +40,15 @@ threads and to moving goalposts, not to writing code.
   per playbook §5.
 - **Merging.** Merging to `main` is done only by the owner.
 
-## Plans shown to the owner: What | Why | Why it's needed
+## Reports to the owner: What | Why | Why it's needed
 
-Every plan you show the owner uses this short format: the overall plan at intake, each wave, each
-milestone's cycle plan, and every intermediate step you announce. One bullet per step, three parts,
-one short line each, in the owner's language (for a Russian-speaking owner: **Что | Зачем | Почему**):
+This format is **only for messages to the owner**: the overall plan at intake, each wave, every
+intermediate step you announce to the owner, statuses, `blocked_on_owner` notices and the final report.
+It is **not** for briefs and prompts to subagents or milestone owners, cycle plans, status lines,
+ledger rows, escalations between agents, or any other file. Write those in their normal form.
+It only changes how messages to the owner are written, so the owner can read them easily. It does not
+change how you think, plan or work.
+One bullet per step, three parts, one short line each, in the owner's language (for a Russian-speaking owner: **Что | Зачем | Почему**):
 
 - **What**: the concrete action you are about to take.
 - **Why (goal)**: what it achieves, and for which goal or AC.
@@ -53,10 +57,6 @@ one short line each, in the owner's language (for a Russian-speaking owner: **Ч
 Example:
 - **What:** add pytest-timeout to check-all | **Why:** a hanging test turns the gate red after 5 min, not
   after 4 h | **Why it's needed:** without it the milestone owner hangs silently and the milestone stalls.
-
-If you cannot fill in "Why it's needed" for a step, drop the step. Milestone owners use the same format
-in their cycle plans (`docs/plan/<change>/<id>-cycle-<n>.md`) and in their status lines to the
-orchestrator.
 
 ## 1. Intake: artifacts the owner approves, once
 
@@ -123,6 +123,10 @@ loop:
              cycle ≥ 2: the frozen checklist from cycle N-1 + regressions
   commit report → reports/critic/<id>-cycle-<n>.json
   if score ≥ threshold and every AC passed (or is [manual] and waiting) → CLOSE
+  if the score is capped only by AC that need an owner action or outside access,
+     and there is no open critical/major                                → BLOCKED_ON_OWNER (F9)
+  if every AC passed, there is no open critical/major, and the only
+     required_improvements are formal                                  → GATE_CLOSE (F10)
   if cycle == 5, or the score rose by less than 0.5 two cycles in a row → ESCALATE
   checklist = critic.required_improvements   (frozen for the next cycle)
   cycle += 1
@@ -135,7 +139,17 @@ loop:
    what changed, the check output, the critic report and what the owner should check by hand. **Do not
    merge.**
 
-**ESCALATE** to the orchestrator with:
+**BLOCKED_ON_OWNER**: stop the cycles at once. Record the milestone as `blocked_on_owner` in the ledger, put
+the exact owner action under "Waiting for owner", and report it to the owner in the What | Why | Why
+it's needed format. The milestone resumes with a new cycle only when the owner has acted. Milestones that do not
+depend on it keep running.
+
+**GATE_CLOSE**: the milestone owner fixes the formal items, runs the check command until it is green,
+commits, and reports. The orchestrator re-runs the check and the AC commands itself and closes the
+milestone. No new critic cycle.
+
+**ESCALATE** to the orchestrator (the orchestrator reports it to the owner in the What | Why | Why
+it's needed format), with:
 - the last score;
 - the open findings with their `origin`;
 - one concrete choice for the owner: accept them as a known risk (recorded in the report), narrow the AC,
@@ -178,12 +192,30 @@ loop:
   The change is made between cycles and follows F3. Editing protected files (`RULES.md`, CI workflows)
   needs the owner's OK. Put it under "Waiting for owner".
 
+- **F9 Blocked on owner: no empty cycles.** A cycle that cannot raise the score is not run. If a critic
+  score is capped only by AC that need an owner action or outside access (a repository, a secret, an
+  account, a manual GitHub step), and there is no open `critical` or `major`, the milestone stops as
+  `blocked_on_owner` right after that report. The owner action goes into the cycle-1 plan as soon as it
+  is known. If an AC is likely to be blocked, ask for the access at intake, not after the first critic.
+- **F10 Gate closure.** Formal items are evidence not committed, a stale mutant id, a report to
+  regenerate, lint. They never start a new critic cycle. If every AC passed and only formal items remain,
+  close by the gate (see GATE_CLOSE).
+- **F11 Timeouts.** The check command enforces time limits: a per-test timeout (for example
+  pytest-timeout), timeouts on every call to a test stand, network stream or external service, and
+  mutation testing limited to the modules the milestone changed. A hang beyond the limit turns the gate
+  red. It never means waiting.
+- **F12 Heartbeat.** A milestone owner commits, or writes a status line to its branch, at least every 30
+  minutes. After 60 minutes of silence the orchestrator
+  checks it. If it is stuck, the orchestrator restarts it from the last commit with a narrow brief and
+  adds a ledger row.
+
 ## 5. Ledger `reports/progress.md`
 
 ```markdown
 # Progress
 ## Waiting for owner
 - [ ] <question> — default taken: <x> — affects: <milestones>
+- [ ] <milestone> blocked_on_owner — action needed: <exact step> — unblocks: <AC ids>
 
 ## Metrics
 | milestone | cycles | first-critic score | gate red before critic | new_regression | missed_earlier | new_scope | intent→PR (h) |
@@ -204,8 +236,9 @@ The goal is reached when, for every milestone:
 - the last critic score is at or above its threshold;
 - every AC has passed, or is `[manual]` and confirmed by the owner.
 
-Report to the owner:
+Report to the owner in the What | Why | Why it's needed format, one bullet per item:
 - the metrics table;
 - the open "Waiting for owner" items;
 - the PRs to merge, in merge order;
-- gates added under F8.
+- gates added under F8;
+- milestones still `blocked_on_owner`, with the exact action that unblocks each one.

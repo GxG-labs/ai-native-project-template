@@ -15,9 +15,8 @@ Inputs:
   conservative option, mark it `pending_owner_decision` with the default you took, and continue.
 
 ## How
-0. Before you write any code, write the cycle plan to `docs/plan/<change>/<id>-cycle-<n>.md`, one bullet
-   per step in the format **What | Why (goal) | Why it's needed**. Drop any step that has no "why it's
-   needed".
+0. Before you write any code, write a short cycle plan to `docs/plan/<change>/<id>-cycle-<n>.md`:
+   the steps, each tied to an AC or checklist item.
 1. Tests first (`superpowers:test-driven-development`). For each AC and checklist item, write a failing
    test, then make it pass. Never edit a test just to make it pass.
 2. Use standard tools and libraries over home-made mechanisms (F7). If you must hand-roll something, say
