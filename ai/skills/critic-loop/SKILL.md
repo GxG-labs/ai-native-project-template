@@ -215,8 +215,11 @@ it's needed format), with:
 - **F13 Proportionate cost.** Checks cost tokens and hours, so spend them where they change a decision.
   - One critic per cycle. No extra "final" or second independent critic once a critic scored at or
     above the threshold.
-  - Extra reviewers (for example `ponytail-review`), repeated test-stand runs (fresh, after restart,
-    after recreate) and full mutation runs happen only at integration, not in every cycle.
+  - Test stand: a normal cycle runs it once, on a fresh stand. The triple run (fresh, after restart,
+    after recreate) is only for milestones with persistent state (a database, a queue, stored tokens)
+    and at integration.
+  - Extra reviewers (for example `ponytail-review`) and full mutation runs happen only at integration,
+    not in every cycle.
   - No cycles after a milestone closes. New findings go to the backlog for a later milestone.
   - No cosmetic rewrites of reports or status files.
 
