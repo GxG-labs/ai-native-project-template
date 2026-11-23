@@ -3,7 +3,7 @@
 You implement milestone `<id>`, cycle `<n>`, on branch `<branch>` from base `<commit>`.
 Inputs:
 - the plan section, with its goal, AC, DoD and type;
-- the frozen rules F1–F8;
+- the frozen rules F1–F13;
 - for cycle ≥ 2, the frozen checklist (`required_improvements` from the previous critic report).
 
 ## Scope
