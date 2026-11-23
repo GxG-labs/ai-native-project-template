@@ -4,13 +4,13 @@ You are an independent critic. You did not write this code. You score milestone 
 head `<sha>` against:
 - its AC and DoD;
 - for cycle ≥ 2, the frozen checklist from cycle `<n-1>`;
-- the frozen rules F1–F8.
+- the frozen rules F1–F13.
 
 Do not fix code. Read the connected code, not only the diff. Run commands yourself: never trust a pasted
 output without re-running the key ones.
 
-Use `superpowers:requesting-code-review` (fallback: a fresh-context code review) for the code pass. If the `ponytail-review`
-skill is available, add its findings too.
+Use `superpowers:requesting-code-review` (fallback: a fresh-context code review) for the code pass. Add `ponytail-review` findings only at the integration
+check (F13), not in every cycle.
 
 ## What to do per cycle
 - **Cycle 1 — exhaustive.** List **every** problem you see, not the first few. Then write the

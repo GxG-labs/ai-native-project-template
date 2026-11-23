@@ -68,9 +68,12 @@ Example:
    - `id`, goal, dependencies, a wave (milestones with no dependency on each other run in parallel);
    - **type**: `spike` | `tooling` | `core` | `adversarial` (security gates, auth, isolation, anything an
      attacker would try to bypass);
-   - **threshold**: `spike`/`tooling` → 8, `core`/`adversarial` → 9;
+   - **threshold**: 8 for every milestone; 9 only for `security` milestones (auth, approval, policy,
+     tokens, secrets);
    - **acceptance criteria (AC)**: each one checkable by a command. Mark manual ones `[manual]`;
    - **DoD**: the check command plus any extra tools (mutation testing, secret scan). Fix them **now**.
+     Mutation testing runs only on the files the milestone changed, and only in security modules. One
+     full mutation run happens once, before the merge to `main`.
      Prefer standard tools over home-made ones.
 4. **All owner decisions up front.** List every open question the plan touches. Ask them in one batch,
    each with a recommended default.
@@ -85,7 +88,8 @@ From here on, the rules, thresholds, DoD and rubric are **frozen**. Changes appl
 - **Start.**
   - Start every milestone in the current wave.
   - Each runs as a **background sub-agent** in its own git worktree (`superpowers:using-git-worktrees`).
-    No more than 4 at once.
+    No more than 3 at once.
+    Executors run on a cheaper model; critics and the orchestrator on the strongest one.
   - Use a mechanism that wakes you when a sub-agent finishes. **Never poll, never sleep.**
   - For work that must outlive this session, start one long-running remote session per milestone with
     the same brief.
@@ -127,7 +131,7 @@ loop:
      and there is no open critical/major                                → BLOCKED_ON_OWNER (F9)
   if every AC passed, there is no open critical/major, and the only
      required_improvements are formal                                  → GATE_CLOSE (F10)
-  if cycle == 5, or the score rose by less than 0.5 two cycles in a row → ESCALATE
+  if cycle == 3, or the score rose by less than 0.5 two cycles in a row → ESCALATE
   checklist = critic.required_improvements   (frozen for the next cycle)
   cycle += 1
 ```
@@ -208,6 +212,13 @@ it's needed format), with:
   minutes. After 60 minutes of silence the orchestrator
   checks it. If it is stuck, the orchestrator restarts it from the last commit with a narrow brief and
   adds a ledger row.
+- **F13 Proportionate cost.** Checks cost tokens and hours, so spend them where they change a decision.
+  - One critic per cycle. No extra "final" or second independent critic once a critic scored at or
+    above the threshold.
+  - Extra reviewers (for example `ponytail-review`), repeated test-stand runs (fresh, after restart,
+    after recreate) and full mutation runs happen only at integration, not in every cycle.
+  - No cycles after a milestone closes. New findings go to the backlog for a later milestone.
+  - No cosmetic rewrites of reports or status files.
 
 ## 5. Ledger `reports/progress.md`
 
