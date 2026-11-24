@@ -1,9 +1,12 @@
 # Executor brief (one cycle of one milestone)
 
+This brief also serves an external executor (another tool run by the owner): the orchestrator copies it
+into `reports/prompts/<id>-cycle-<n>.md` with the plan section and the checklist. The report is the same.
+
 You implement milestone `<id>`, cycle `<n>`, on branch `<branch>` from base `<commit>`.
 Inputs:
 - the plan section, with its goal, AC, DoD and type;
-- the frozen rules F1–F13;
+- the frozen rules in `references/rules.md`;
 - for cycle ≥ 2, the frozen checklist (`required_improvements` from the previous critic report).
 
 ## Scope
@@ -22,13 +25,15 @@ Inputs:
 2. Use standard tools and libraries over home-made mechanisms (F7). If you must hand-roll something, say
    why in the report.
 3. For large milestones, split the work into tasks and use `superpowers:subagent-driven-development`.
-4. Commit in small steps on the milestone branch. Never commit to `main`.
+4. Commit in small steps on the milestone branch. Never commit to `main`. Run long jobs (mutation
+   testing, stands) in parts and commit each part, so a lost container costs one part (F17). Write a
+   status line at least every 30 minutes (F12). Do not use tools that prompt for approval mid-run.
 
 ## Self-check before handing off (F4). Required.
 Run and paste the output, the exit code and the head commit:
 - the check command (must exit 0);
 - every DoD tool (mutation testing: read every surviving mutant; kill it or justify it as equivalent);
-- the critic rubric from `critic.md` applied to your own diff: list what you would flag, and fix it.
+- the critic checklist from `critic.md` applied to your own diff: list what you would flag, and fix it.
 Push, and wait for CI on the head commit. A red gate means you keep working. Do not hand off.
 
 ## Report: `reports/conformance/<id>-cycle-<n>.json` (commit it)
