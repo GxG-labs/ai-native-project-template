@@ -89,7 +89,7 @@ From here on, the rules, thresholds, DoD and rubric are **frozen**. Changes appl
   - Start every milestone in the current wave.
   - Each runs as a **background sub-agent** in its own git worktree (`superpowers:using-git-worktrees`).
     No more than 3 at once.
-    Executors run on a cheaper model; critics and the orchestrator on the strongest one.
+    Pick each subagent's model by its role (see "Models for subagents" below).
   - Use a mechanism that wakes you when a sub-agent finishes. **Never poll, never sleep.**
   - For work that must outlive this session, start one long-running remote session per milestone with
     the same brief.
@@ -111,6 +111,27 @@ From here on, the rules, thresholds, DoD and rubric are **frozen**. Changes appl
   - Write each one under "Waiting for owner" in `progress.md`, with the default you took.
   - Keep going on that default. Keep going on every milestone the question does not touch.
   - A different answer from the owner later becomes `new_scope` for the next cycle.
+
+## Models for subagents
+
+Tokens are the main cost of this process. Give each role the cheapest model that does it well.
+
+| Role | Model |
+| --- | --- |
+| Orchestrator; spec and design decisions; the pre-code design review | the strongest model |
+| Critic of a `security` milestone | the strongest model |
+| Critic of a `spike`, `tooling` or `core` milestone | a mid-tier model |
+| Executor (default) | a mid-tier model |
+| Executor for formal items (F10): evidence, stale ids, report regeneration, lint, renames | the smallest model |
+| Heartbeat, status lines, ledger rows, re-running the gate, reading logs, searching the repo | the smallest model |
+
+- Move an executor up one tier only on evidence: the same finding survived two cycles at the lower tier.
+  Record it in the ledger.
+- Never move the critic below the executor's tier for the same milestone.
+- Add a `model` column to the ledger rows, so the cost of each milestone is visible.
+
+Set the model when you start each subagent or session, and a lower reasoning effort for routine
+work where the tool allows it. Some tools fix the model when a session starts, so choose first.
 
 ## 3. The loop inside one milestone (the milestone owner runs it)
 
