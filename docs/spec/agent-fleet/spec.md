@@ -102,6 +102,16 @@ Enforced by the coordinator's harness, not by prompt wording (RULES principle 16
 - The queue is shared with the owner only. Workers get no queue credentials.
 - The connector requires a long random token in a request header
   (see `architecture.md`, "Security"); Funnel exposes only the connector port.
+- Merging a pull request is proposed by the task coordinator (a short-lived
+  Claude worker, one per request) once the review is clean, decided by the
+  owner's spoken "yes" bound to that proposal, and executed by the coordinator
+  only when GitHub checks are green; the `fleet` token is limited to listed
+  repositories and `main` is protected (see `architecture.md`, "How a
+  development task runs"). This departs from the playbook's "merge — only
+  you" on purpose.
+- A development task is built by any agent in the allowlist, chosen by the
+  task coordinator, and reviewed once by a read-only worker of another vendor; the
+  builder never merges (see `architecture.md`, "Independent review").
 - The mobile console uses Orca's end-to-end encrypted pairing; re-pair if the
   phone is lost.
 - Workers run in their own worktrees; secrets follow `SECURITY.md` and
