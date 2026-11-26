@@ -8,11 +8,15 @@ command=$(jq -r '.tool_input.command // ""' <<<"$input")
 cwd=$(jq -r '.cwd // ""' <<<"$input")
 [[ -n "$cwd" ]] || cwd="${CLAUDE_PROJECT_DIR:-.}"
 
-grep -Eq '(^|[^[:alnum:]_-])git([^[:alnum:]_-]|$)' <<<"$command" || exit 0
-grep -Eq '(^|[[:space:]])(commit|push)([[:space:]]|$)' <<<"$command" || exit 0
+# Split the command into simple commands and keep only git commit/push ones,
+# so text in arguments, heredocs or other commands does not trigger the guard.
+git_cmds=$(sed -E 's/(&&|\|\||;|\|)/\n/g' <<<"$command" |
+  grep -E '^[[:space:]]*git([[:space:]]|$)' |
+  grep -E '[[:space:]](commit|push)([[:space:]]|$)' || true)
+[[ -n "$git_cmds" ]] || exit 0
 
-if grep -Eq '(^|[[:space:]])push([[:space:]]|$)' <<<"$command" &&
-   grep -Eq '[[:space:]:+]main([[:space:]]|$)' <<<"$command"; then
+if grep -E '[[:space:]]push([[:space:]]|$)' <<<"$git_cmds" |
+   grep -Eq '[[:space:]:+]main([[:space:]]|$)'; then
   echo "Blocked: pushing to main is not allowed. Push a feature branch and open a PR." >&2
   exit 2
 fi
