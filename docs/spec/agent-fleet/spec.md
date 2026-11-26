@@ -22,7 +22,7 @@ ownership, and invariants. Worker tasks themselves are out of scope.
 | Coordinator | Long-lived agent in an Orca terminal, using `ai/skills/orca-orchestration` | Turning a request into a Run, Tasks and Dispatches; choosing workers; answering or escalating worker questions; validating results | Do task work itself |
 | Orca runtime | Orca app or `orca serve` | Run, Task, Dispatch, messages, liveness, worktrees, automations | Decide what to do |
 | Workers | Agent CLIs launched by `worker-start --agent <id>` | One Task each: heartbeats, `ask`, exactly one `worker_done --outcome` | Talk to the owner or the queue |
-| Mobile console | Orca iOS app, already paired with the owner's Mac | Notifications when agents finish or ask; dictating a task or an answer straight to the coordinator; a quick look at agent state | Hold a spoken conversation or read status back by voice |
+| Mobile console | Orca iOS app (beta), already paired with the owner's Mac | Secondary "eyes" channel: notifications, viewing workers and terminals, manual intervention, dictating a task or answer to the coordinator; fallback when the voice connector is down | Act as the voice front: dictation only, no hands-free listen–speak loop, no spoken replies |
 
 The voice front has no shell, so it never calls Orca directly. The coordinator
 is separate so that long waits survive the end of a voice session.
@@ -119,6 +119,10 @@ Enforced by the coordinator's harness, not by prompt wording (RULES principle 16
   becomes the only owner channel until another bridge is chosen.
 - Mobile console: check whether it works away from the Mac's Wi-Fi, and
   whether it offers a chat surface with the coordinator or only terminals.
+  Closing desktop Orca can drop the mobile session.
+- Revisit the voice front if Orca ships a conversational voice mode; track
+  stablyai/orca#45925 (Siri/Shortcuts voice mode) and stablyai/orca#39455
+  (two-way audio).
 - The Mac must stay awake. An always-on host can later run `orca serve`
   (with `--mobile-pairing` for the phone).
 - Only some agents accept `--model`/`--effort` (Claude, Codex, Cursor,
