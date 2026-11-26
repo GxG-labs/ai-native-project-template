@@ -2,7 +2,8 @@
 
 Status: `draft`
 Decision owner: project owner
-Related intent: none yet
+Related intent: [intent/agent-fleet/intent.md](../../../intent/agent-fleet/intent.md)
+Decision draft: [architecture.md](architecture.md) removes the intake queue, the persistent coordinator and the wake-up automation described below; it wins on conflict until this file is aligned.
 
 ## Boundary
 
