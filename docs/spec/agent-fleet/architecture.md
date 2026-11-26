@@ -5,7 +5,7 @@ Decision owner: project owner
 Intent: [intent/agent-fleet/intent.md](../../../intent/agent-fleet/intent.md)
 Parent spec: [spec.md](spec.md). Where this file and `spec.md` disagree, this file wins (see "Changes to the draft spec").
 
-Applied lens: ponytail (smallest change that fully solves the task). Every part below passed the test "does the goal fail without it?".
+Applied lens: ponytail (smallest change that fully solves the task). Reviewed once after the first draft: two security ideas that failed the test were dropped (see "Security").
 
 ## Decision in one paragraph
 
@@ -16,7 +16,7 @@ The owner talks to Claude app in voice mode. Claude app calls one small connecto
 | Component | Is | Owns | Written by us |
 | --- | --- | --- | --- |
 | Voice front | Claude app, voice mode (paid plan, so Sonnet or Opus) | Conversation, splitting the request into worker specs, choosing agents, reading questions and results aloud | No |
-| Connector `fleet-mcp` | Node 22 + TypeScript MCP server, Streamable HTTP, listens on `127.0.0.1` | Six tools; argument validation; agent allowlist; limit of 4 active workers; bearer-token check | Yes, about 200 lines plus tests |
+| Connector `fleet-mcp` | Node 22 + TypeScript MCP server, Streamable HTTP, listens on `127.0.0.1` | Six tools; argument validation; agent allowlist; limit of 4 active workers; sign-in check (Google OAuth, owner's account only; a bearer token only for the first test in step 1); call log | Yes, about 200 lines plus tests |
 | Tailscale Funnel | Already-installed Tailscale | Public HTTPS address on port 443 pointing at the connector | No (one command) |
 | Orca | Orca app (or `orca serve` later) | Runs, Tasks, Dispatches, worker mail (`ask`, `worker_done`), liveness, worktrees | No |
 | Workers | Agent CLIs started by `worker-start --agent <id>` | One Task each; heartbeats, `ask`, one `worker_done` | No |
@@ -60,7 +60,7 @@ One task = one worker = one branch = one pull request:
 
 1. **Plan, approved once.** The worker reads the intent and writes a short plan (files, order, risks, the one check command) and marks any critical parts. It calls `ask` with a three-sentence summary; the owner approves or corrects by voice, including the critical marks. This is the only mandatory question.
 2. **Build to green.** The worker writes the failing test first, then the code, until the single check command passes. The repository's Stop hook keeps it from finishing red.
-3. **One independent review.** The worker runs `/code-review` and `ponytail-review` (fresh contexts, read-only). Only critical and major findings count; minor ones go into the pull request description.
+3. **One independent review.** Development tasks are built by a Claude worker, because `/code-review` is a Claude Code feature; other vendors take research, parallel and critic tasks. The worker runs `/code-review` and `ponytail-review` (fresh contexts, read-only). Only critical and major findings count; minor ones go into the pull request description.
 4. **One fix round.** The worker fixes the blockers and reruns the check command. No second review: the check command, not another opinion, confirms the fixes.
 5. **Pull request.** Description: what changed, the check output, review result, what to look at by hand. CI repeats the check.
 6. **Merge by the owner's word.** The voice Claude reads the title and result and asks "merge?". On a clear yes it starts a short worker whose only job is `gh pr merge` after CI is green. The phone's GitHub button works as well.
@@ -94,7 +94,7 @@ Per target repository, once: a single `npm run check`-style command, the branch 
 | Bridge from tools to Orca | none exists | `fleet-mcp`, about 200 lines |
 | Auto-start and keep awake | launchd + `caffeinate` | one plist file |
 
-Everything we write lives in `src/fleet/` (`server.ts`, `orca.ts`) with tests in `tests/`. Estimated work: one focused day for steps 1–5, plus the time for step 6 on a real task. This is an estimate, not a measurement.
+Everything we write lives in `src/fleet/` (`server.ts`, `orca.ts`) with tests in `tests/`. Estimated work: the six tools are about 200 lines; Google OAuth, lockout and the call log add roughly as much again, so plan on 400 lines and about two focused days for steps 1–5 (the `fleet` account and agent logins are most of the unknowns), plus step 6 on a real task. This is an estimate, not a measurement.
 
 ## Build order
 
@@ -105,8 +105,22 @@ Each step ends with a check the owner can see. Do not start a step before the pr
 2. **Start and read.** Add `start_run`, `start_worker`, `status`, `result` for the `claude` agent only. Done when a trivial task given by voice finishes and its summary is read back by voice.
 3. **Questions.** Add `answer`. Done when a worker's deliberate question is read by voice, the spoken answer reaches it, and it finishes.
 4. **Other vendors.** Repeat the step-3 task with `codex`, `pi`, `gemini`. An agent that does not send `worker_done` reliably is removed from the allowlist. Done when at least three vendors pass.
-5. **Hardening.** Concurrency limit of 4, agent allowlist, output truncation, unit tests for argument building and limits, launchd agent with keep-alive, `caffeinate` while the connector runs. Done when after a Mac restart and login the voice test from step 3 still passes with no terminal touched.
+5. **Hardening and security** (all items from "Security" below). Concurrency limit of 4, agent allowlist, output truncation, Google OAuth replacing the test token, lockout and call log, Orca and workers moved under the `fleet` account, unit tests for argument building, limits and the sign-in check, launchd agent with keep-alive, `caffeinate` while the connector runs. Done when (a) a request with no sign-in, a wrong Google account or a stale token is refused and logged, (b) after a Mac restart and login the voice test from step 3 still passes with no terminal touched.
 6. **Real work.** Give a real agent-development task using the task template from "How a development task runs". Done when its plan was approved by voice, its pull request exists with a green check and the one review result in the description, and the whole task took under 90 minutes of wall-clock. Then run one task with a part marked critical and check that a critic of another vendor returns findings with evidence.
+
+## Security
+
+The connector is on the public internet and a stolen sign-in would let a stranger start agents that have shell access, so these controls are part of the build, not later polish.
+
+1. **Google OAuth.** The connector is its own OAuth front for Google sign-in (the official MCP SDK has a proxy helper for this); Claude app is given our client ID and secret under "use your own OAuth client". After sign-in the connector accepts only the owner's verified Google account (one address in the config) and short-lived access tokens. Step 1 uses a bearer token only to prove the voice path; step 5 removes it.
+2. **Lockout and log.** After 5 failed attempts in 10 minutes, all sign-ins are refused for 30 minutes. Every call (time, tool, agent, first 200 characters of the spec, result) goes to an append-only log on the Mac; `status` includes "last 5 calls" so the owner hears unfamiliar ones.
+3. **Everything runs under a dedicated macOS account `fleet`.** Orca (`orca serve`), the connector and all workers run as that user, with their own agent logins and only the project repositories they need. It has no access to the owner's keychain, SSH keys, browser profile or personal folders. This is the real damage limit: if sign-in is ever bypassed, a stranger controls agents that can touch only `fleet`'s files. A worktree alone is not a sandbox. Orca's iOS pairing is redone against this instance. Unverified: that `orca serve` with `ORCA_SERVE_RUNTIME=orcad` runs well in a second user's session; step 0 checks it.
+4. **Already planned:** fixed six tools, no shell, agent allowlist, four-worker cap, truncated and labelled output, secrets in the `fleet` keychain.
+5. **Soft rule, not a control:** the task template tells the voice Claude to read back and confirm anything that deletes data, handles secrets or money, or pushes to `main`. It is advice to the model, so it is not counted as protection.
+
+Dropped after review: a keyword filter on specs (easy to bypass, gives false comfort) and switching Funnel off when idle (then voice could not switch it back on). OAuth, the allowlist, the lockout and the `fleet` account carry the weight.
+
+If Claude app cannot use a custom Google-backed OAuth flow when tested at step 5, the token goes in the connector form's request headers and is rotated weekly; items 2–4 still apply.
 
 ## Risks
 
@@ -114,7 +128,7 @@ Each step ends with a check the owner can see. Do not start a step before the pr
 | --- | --- |
 | Voice mode may not call custom connectors (Anthropic's help says it uses connected tools; not yet shown for ours) | Step 1 is exactly this test. If it fails, the phone console is the only channel until voice supports it |
 | No push: Claude cannot speak first when a question arrives | The worker waits safely; `status` shows questions first at the start of each talk; the phone is notified by Orca |
-| Public address on the internet | Bearer token on every request; only six fixed calls; Funnel exposes only the connector port; token kept in the Mac keychain, not in the repository |
+| Public address on the internet | Google sign-in limited to the owner's account, lockout, call log, everything under the `fleet` Mac account (see "Security"); only six fixed calls; Funnel exposes only the connector port; secrets in the `fleet` keychain, not in the repository |
 | Prompt injection through worker output | Output is truncated and labelled as data; the connector has no tool that runs free text as a command |
 | Mac asleep or off | `caffeinate`; later move `fleet-mcp` and `orca serve` to an always-on machine |
 | A CLI that cannot report back | Allowlist only agents that passed step 4 |
