@@ -100,8 +100,8 @@ Enforced by the coordinator's harness, not by prompt wording (RULES principle 16
 ### Security
 
 - The queue is shared with the owner only. Workers get no queue credentials.
-- The connector requires authentication (preferably OAuth); Funnel exposes
-  only the connector port.
+- The connector requires a long random token in a request header
+  (see `architecture.md`, "Security"); Funnel exposes only the connector port.
 - The mobile console uses Orca's end-to-end encrypted pairing; re-pair if the
   phone is lost.
 - Workers run in their own worktrees; secrets follow `SECURITY.md` and
